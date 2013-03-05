@@ -1,0 +1,37 @@
+
+<div class="content">
+
+    <% if ( location_state == "RESULTS" ) { %>
+
+
+    <ul class="dataList">
+        <% _.each(foursuare_locations, function(item) { %>
+
+        <li id="<%= item.id %>" lat="<%= location.lat %>" lon="<%= location.lon %>">
+
+                <div id="name"><%= item.name %></div>
+                <%= item.location.address %>
+
+        </li>
+
+        <% }) %>
+    </ul>
+
+
+    <% } else if ( location_state == "COMPLETE" ) { %>
+
+        <%= LATITUDE %>,
+        <%= LONGITUDE %>
+            <hr/>
+        <%= location_data.name %>
+
+    <% } else if ( location_state == "SEARCHING" ) { %>
+        Finding Location...
+
+    <% } else  { %>
+        Unable to determine your current location.  Please ensure that location services are enabled.
+
+        <%= location_error %>
+    <% }  %>
+
+</div>

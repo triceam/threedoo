@@ -1,0 +1,69 @@
+
+<div class="content noteView">
+
+    <div class="noteContent">
+        <textarea id="noteContent" placeholder="Add your words..."><%= DETAIL %></textarea>
+    </div>
+
+    <% if ( images.length > 0 || soundclips.length > 0) { %>
+        <div class="mediaContainer">
+    <% } %>
+
+    <% if ( images.length > 0 ) { %>
+    <ul id="photos">
+        <%
+        var i = 0;
+        _.each(images, function(item) { %>
+
+        <li id="<%= item.ID %>" class="photoItem"><img class="photoThumbnail" src="<%= item.REF %>"  index="<%= i %>"/></li>
+
+        <% i ++;
+        }) %>
+    </ul>
+    <% } %>
+
+    <% if ( soundclips.length > 0 ) { %>
+    <ul id="audio">
+        <% _.each(soundclips, function(item) { %>
+
+
+        <li id="<%= item.ID %>" src="<%= item.REF %>" class="audioItem">
+
+            <img id="mic" src="assets/images/audio_mic.png" />
+            <button id="playButton"></button>
+
+            <div id="audioTrack">
+                <div id="progress"></div>
+            </div>
+
+            <img id="audioThumb" src="assets/images/audio_thumb.png" />
+
+            <button id="deleteButton"></button>
+
+            <!--<audio src="<%= item.REF %>" controls preload="none"></audio>-->
+        </li>
+
+        <% }) %>
+    </ul>
+    <% } %>
+
+    <% if ( images.length > 0 || soundclips.length > 0) { %>
+        </div>
+    <% } %>
+
+    <div class="noteContent">
+        <button id="addLocationButton"><%= location_data.name %></button>
+
+        <div style="position: relative; width:300px; height:44px;">
+        <button id="addPhotoButton">Add Photo</button>
+
+        <button id="addAudioButton">Add Sound</button>
+        </div>
+    </div>
+
+    <br/>
+    <br/>
+    <br/>
+
+
+</div>
