@@ -335,7 +335,7 @@ window.DatabaseManager = function() {
         }
     }
 
-    this.deleteAudio = function() {
+    this.deleteAudio = function(asset, callback) {
 
         window.FileUtil.delete( asset.REF );
 

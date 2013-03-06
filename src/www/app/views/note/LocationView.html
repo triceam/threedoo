@@ -4,10 +4,10 @@
     <% if ( location_state == "RESULTS" ) { %>
 
 
-    <ul class="dataList">
+    <ul class="dataList geoList">
         <% _.each(foursuare_locations, function(item) { %>
 
-        <li id="<%= item.id %>" lat="<%= location.lat %>" lon="<%= location.lon %>">
+        <li id="<%= item.id %>">
 
                 <div id="name"><%= item.name %></div>
                 <%= item.location.address %>
@@ -20,10 +20,42 @@
 
     <% } else if ( location_state == "COMPLETE" ) { %>
 
-        <%= LATITUDE %>,
-        <%= LONGITUDE %>
-            <hr/>
-        <%= location_data.name %>
+
+        <b><%= location_data.name %></b><br/>
+
+        <% _.each(location_data.categories, function(category) { %>
+
+            <img src="<%= category.icon.prefix %>32<%= category.icon.suffix %>" />
+            <%= category.shortName %>
+
+        <% }) %>
+    <hr/>
+
+    <%= location_data.location.address %>
+    <%= location_data.location.city %>
+    <%= location_data.location.state %>
+    <%= location_data.location.postalCode %>
+    <br/>
+
+    <%= location_data.contact.formattedPhone %>
+
+    <%= location_data.contact.twitter %>
+
+    <br/>
+    <!--
+    <%= location_data.menu %>
+        -->
+    <hr/>
+
+    <%= location_data.hours %>
+
+    <hr/>
+
+    <%= location_data.canonicalUrl %>
+
+    <%= LATITUDE %>,
+    <%= LONGITUDE %>
+
 
     <% } else if ( location_state == "SEARCHING" ) { %>
         Finding Location...

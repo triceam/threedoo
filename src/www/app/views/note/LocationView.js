@@ -10,7 +10,7 @@ window.LocationView = Backbone.View.extend({
     FOURSQUARE_TIMEOUT: 20000,
     FOURSQUARE_APP_ID: "0XOM4FJPV4O2GIEU25KBB3CG4ATRQXQCWIPCCKUPZN1UVXTA",
     FOURSQUARE_SECRET: "CYBA5WAM40JCG3GP0H3KWYU0UXTWINCAMXVQVRQIFXYIHO5W",
-    FOURSQUARE_API_URL: "https://api.foursquare.com/v2/venues/search?ll={lat},{lon}&client_id={app_id}&client_secret={secret}&v=20130101",
+    FOURSQUARE_API_URL: "https://api.foursquare.com/v2/venues/search?ll={lat},{lon}&client_id={app_id}&client_secret={secret}&v=20130101&limit=15",
 
 
     initialize: function(options) {
@@ -51,6 +51,7 @@ window.LocationView = Backbone.View.extend({
 
 
     render:function (eventName) {
+        console.log("render")
         var template = templates.locationView;
         this.$el.html(template(this.model));
 
@@ -119,7 +120,7 @@ window.LocationView = Backbone.View.extend({
 
     //jqXHR.done(function(data, textStatus, jqXHR) {});
     onFoursquareResult:function (data, textStatus, jqXHR) {
-        console.log(data);
+        //console.log(data);
         try {
             this.model.foursuare_locations = data.response.venues;
             this.model.location_state = "RESULTS";

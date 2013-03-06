@@ -15,11 +15,15 @@ window.DeleteItemModalView = Backbone.View.extend({
                 type = "note";
                 contents = "contents";
                 break;
+            case "audio":
+                type = "recording";
+                contents = "";
+                break;
         }
 
         var modalContent = $('<div class="footerOptions">' +
             '<h4>Are you sure you want to delete this ' + type + '?</h4>' +
-            '<p>Once you delete this ' + type + ', it, and all of its ' + contents + ' will be gone forever.</p>' +
+            (contents != "" ? '<p>Once you delete this ' + type + ', it, and all of its ' + contents + ' will be gone forever.</p>' : "") +
             '<button id="deleteListConfirm" class="warningButton">DELETE ' + type.toUpperCase() + '</button> ' +
             '<button id="keepList" class="defaultButton">KEEP ' + type.toUpperCase() + '</button> ' +
             '</div>');

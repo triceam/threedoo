@@ -506,6 +506,14 @@ body {
     background: url('../images/buttons/play_button_active.png');
 }
 
+
+.audioItem #playButton.pauseButton {
+    background: url('../images/buttons/pause_button.png');
+}
+.audioItem #playButton.pauseButton.active {
+    background: url('../images/buttons/pause_button_active.png');
+}
+
 .audioItem #audioThumb {
     position:absolute;
     top:20px;
@@ -614,6 +622,20 @@ body {
 .locationButton:active {
     background: url('../images/buttons/location_active.png');
 }
+
+.dataList.geoList li {
+    padding-top: 10px;
+    padding-left: 10px;
+    font-size: 11px;
+    color: #125d6d;
+}
+
+.dataList.geoList li div{
+    font-size: 14px;
+    color: #053d49;
+}
+
+
 
 
 /* LIST STYLES */

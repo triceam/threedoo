@@ -56,7 +56,8 @@ window.NoteView = Backbone.View.extend({
         "click #addPhotoButton": "onPicButtonClick",
         "click #addAudioButton": "onAudioButtonClick",
         "click img": "onPhotoClick",
-        "click #playButton": "onAudioPlayClick"
+        "click #playButton": "onAudioPlayClick",
+        "click #deleteButton": "onAudioDeleteClick"
     },
 
     render:function (eventName) {
@@ -172,7 +173,11 @@ window.NoteView = Backbone.View.extend({
             this.audioPlayer.release();
         }
         clearInterval(this.audioInterval);
-        this.$el.find("#progress").css("width", "0%");
+        var progress = this.$el.find("#progress");
+        progress.css("width", "0%");
+
+        this.$el.find("#playButton").removeClass("pauseButton");
+
     },
 
     onAudioPlayClick: function(event) {
@@ -189,6 +194,7 @@ window.NoteView = Backbone.View.extend({
         var src = target.attr("src");
         var progress = target.find("#progress");
         this.audioId = target.attr("id");
+        target.find("#playButton").addClass("pauseButton");
 
         this.audioPlayer = new Media(src, function(success){
             console.log(success);
@@ -210,14 +216,49 @@ window.NoteView = Backbone.View.extend({
                     percent = (position/self.audioPlayer.getDuration())*100;
                 }
 
-                percent = 10;
-
-                console.log( percent+"%" );
+                //console.log( percent+"%" );
 
                 progress.width( percent+"%");
 
             } );
 
         }, 500);
+    },
+
+
+    onAudioDeleteClick: function(event) {
+
+        var self = this;
+        this.stopAudio();
+
+        var target = $(event.target);
+
+        while ( !target.is("li") ){
+            target = target.parent();
+        }
+
+        this.deleteModal = new DeleteItemModalView({
+            type:"audio"
+        })
+        this.deleteModal.bind("deleted", function(event){
+
+            var id =target.attr("id");
+            var asset = undefined;
+            for (var x=0; x< self.model.soundclips.length; x++){
+                if(self.model.soundclips[x].ID == id) {
+                    asset = self.model.soundclips[x];
+                }
+            }
+            window.DatabaseManager.instance.deleteAudio(asset, function(){
+
+                self.model.soundclips[x] = _.without( self.model.soundclips, asset );
+                target.remove();
+            });
+        });
+        this.deleteModal.bind("cancel", function(event){
+
+        });
+        return killEvent(event);
     }
+
 });
