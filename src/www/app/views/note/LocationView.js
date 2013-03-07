@@ -165,8 +165,10 @@ window.LocationView = Backbone.View.extend({
             this.model.location_data = targetData;
         }
 
+        var self = this;
         window.DatabaseManager.instance.saveNote(this.model, function(){
-            window.viewNavigator.popView();
+            self.model.location_state = "COMPLETE";
+            window.viewNavigator.replaceView( new LocationView({ model:self.model }) );
         });
 
 

@@ -558,7 +558,7 @@ body {
     right:0px;
     bottom: 0px;
     overflow: hidden;
-    background-color: black;
+    background-color: #333;
 }
 
 #photoContainer #imageContainer {

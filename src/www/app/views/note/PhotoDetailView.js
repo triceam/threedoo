@@ -61,13 +61,34 @@ window.PhotoDetailView = Backbone.View.extend({
 
     onDeleteButtonTap: function(event) {
 
-        var self;
+        var self = this;
         var callback = function() {
-            alert("deleted");
             window.viewNavigator.popView();
         }
 
-        window.DatabaseManager.instance.deletePhoto(this.model, callback);
+
+
+        this.deleteModal = new DeleteItemModalView({
+            type:"photo"
+        })
+        this.deleteModal.bind("deleted", function(event){
+
+            /*
+            var id = self.model.id;
+            var asset = undefined;
+            for (var x=0; x< self.model.soundclips.length; x++){
+                if(self.model.soundclips[x].ID == id) {
+                    asset = self.model.soundclips[x];
+                }
+            } */
+            window.DatabaseManager.instance.deletePhoto(self.model, callback);
+        });
+        this.deleteModal.bind("cancel", function(event){
+
+        });
+        return killEvent(event);
+
+
     },
 
     render:function (eventName) {

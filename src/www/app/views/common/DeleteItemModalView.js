@@ -19,6 +19,10 @@ window.DeleteItemModalView = Backbone.View.extend({
                 type = "recording";
                 contents = "";
                 break;
+            case "photo":
+                type = "photo";
+                contents = "";
+                break;
         }
 
         var modalContent = $('<div class="footerOptions">' +
