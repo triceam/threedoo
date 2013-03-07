@@ -15,7 +15,7 @@
 	<key>EnableViewportScale</key>
 	<false/>
 	<key>AutoHideSplashScreen</key>
-	<true/>
+	<false/>
 	<key>ShowSplashScreenSpinner</key>
 	<true/>
 	<key>MediaPlaybackRequiresUserAction</key>
@@ -28,6 +28,7 @@
 	<string>cloud</string>
 	<key>ExternalHosts</key>
 	<array>
+		<string></string>
 		<string>*.foursquare.com</string>
 	</array>
 	<key>Plugins</key>

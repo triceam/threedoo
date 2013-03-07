@@ -74,60 +74,30 @@ window.PhotoDetailView = Backbone.View.extend({
         var template = templates.photoDetailView;
         this.$el.html(template(this.model));
         this.photo = this.$el.find("#photo");
+
         this.imageContainer = this.$el.find("#imageContainer");
-
         this.headerActions = $("<a class='deletePhoto'> </a>");
+        var self = this;
 
+        this.photo.load(function(){
 
-        var win = $(window);
-        var photo = this.photo.get(0);
+            var p = self.photo.get(0);
+            EXIF.getData( p, function(){
+                var orientation = p.exifdata.Orientation;
+                var w = ( orientation >= 5 ) ? p.naturalHeight :p.naturalWidth;
 
-        /*
-        var hAspect = win.width / photo.naturalWidth;
-        var vAspect = win.height / photo.naturalHeight;
+                self.imageScale = (self.$el.width()/w);
+                self.update();
 
-        if ( hAspect < vAspect ) {
-            this.imageScale = hAspect
-        }
-        else
-        {
-            this.imageScale = vAspect
-        }
-        */
-        this.update();
+                //delay display until after slide-in transition, to minimize flicker
+                setTimeout(function(){
+                    self.imageContainer.css("display", "block");
+                }, 650);
+            } );
 
-
-        //this.canvas = this.$el.find("#canvas") ;
-
-        /*
-        this.photo.css({
-            left: this.imagePosition.x + "px",
-            top: this.imagePosition.y + "px",
-            width: "300px"
         });
 
-        */
-
-        /*
-        this.canvas = this.$el.find("#canvas") ;
-
-
-
-        var w = $(window);
-        console.log( w.width(), w.height() )
-        this.canvas.attr( "width", w.width() );
-        this.canvas.attr( "height", w.height() - 45 );
-        //this.canvas.height( w.height() - 45 );
-
-
-        var canvas = this.canvas.get(0);
-        var ctx = canvas.getContext('2d');
-        ctx.canvas.width  = canvas.width;
-        ctx.canvas.height  = canvas.height;
-
-        this.renderCanvas();
-        */
-
+        this.update();
     },
 
     onGestureStart: function(event) {
@@ -287,6 +257,7 @@ window.PhotoDetailView = Backbone.View.extend({
         }
 
 
+        var photo = this.photo.get(0);
         var scale = 1;
         if ( this.activeDistance != 0 && this.pendingDistance != 0 ) {
             scale = this.pendingDistance/this.activeDistance;
@@ -297,10 +268,9 @@ window.PhotoDetailView = Backbone.View.extend({
                 scale =  this.imageScale * scale;
 
                 scale = Math.min( scale, 1.5 );
-                scale = Math.max( scale, 0.025 );
+                scale = Math.max( scale, 0.1 );
 
                 if ( oldScale != scale ) {
-                    var photo = this.photo.get(0);
                     var win = $(window);
 
                     var oldW = photo.naturalWidth * oldScale;
@@ -312,8 +282,29 @@ window.PhotoDetailView = Backbone.View.extend({
                     var diffW = (newW - oldW);
                     var diffH = (newH - oldH);
 
-                    var pctX = this.pendingCenter.x / win.width();
-                    var pctY = this.pendingCenter.y / win.height();
+                    var pctX = (this.pendingCenter.x / win.width());
+                    var pctY = (this.pendingCenter.y / win.height());
+
+                    var halfW = win.width()/2;
+                    var halfH = win.height()/2;
+
+                    /*
+                    if( this.pendingCenter.x < halfW ) {
+                        pctX = -(1-(this.pendingCenter.x / halfW));
+                    }
+                    else if( this.pendingCenter.x > halfW ) {
+                        pctX = ((this.pendingCenter.x-halfW) / halfW);
+                    }
+
+                    if( this.pendingCenter.y < halfH ) {
+                        pctY = -(1-(this.pendingCenter.y / halfH));
+                    }
+                    else if( this.pendingCenter.y > halfH ) {
+                        pctY = ((this.pendingCenter.y-halfH) / halfH);
+                    }   */
+
+
+
 
                     /*
                     var _x = -this.imagePosition.x+this.pendingCenter.x;
@@ -336,8 +327,8 @@ window.PhotoDetailView = Backbone.View.extend({
                     this.imagePosition.x  = -_x;
                     this.imagePosition.y  = -_y;
                                            */
-                   this.imagePosition.x += pctX*(diffW)/4;
-                   this.imagePosition.y +=  pctY*(diffH)/4;
+                   this.imagePosition.x -= pctX*(diffW);
+                   this.imagePosition.y -=  pctY*(diffH);
 
                       /*
 
@@ -384,19 +375,77 @@ window.PhotoDetailView = Backbone.View.extend({
           //  console.log( this.imagePosition )
         }
 
-
+        /*
         this.$el.find("#focal").css({
             top: (this.pendingCenter.y-55) + "px",
             left: (this.pendingCenter.x-10) + "px"
-        })
+        }) */
 
         //var cssOrigin = this.pendingCenter.x*this.imageScale +"px " +this.pendingCenter.y*this.imageScale +"px";
 
         //props[vendor +"transform-origin"] = cssOrigin;
-
+        /*
         var css = ' translate3d(' + this.imagePosition.x + "px, " + this.imagePosition.y + 'px,0) scale(' + this.imageScale + ')';
         this.imageContainer.css('-webkit-transform', css );
            // '-webkit-transform-origin': cssOrigin
+          */
+
+        //this.photo.css('-webkit-transform', 'scale(' + this.imageScale + ')' );
+        //this.imageContainer.css('-webkit-transform', 'translate3d(' + this.imagePosition.x + "px, " + this.imagePosition.y + 'px,0)' );
+
+        if ( photo && photo.naturalWidth ) {
+
+
+            var scaledW = photo.naturalWidth * this.imageScale;
+            var scaledH = photo.naturalHeight * this.imageScale;
+
+            var maxW;
+            if (scaledW < $(window).width()) {
+                maxW = $(window).width() - scaledW;
+                this.imagePosition.x = Math.max(0, this.imagePosition.x);
+                this.imagePosition.x = Math.min(maxW, this.imagePosition.x);
+                //this.imagePosition.y = Math.max(maxW, this.imagePosition.x);
+            }
+            else {
+                maxW = (-photo.naturalWidth * this.imageScale) + $(window).width();
+                this.imagePosition.x = Math.max(maxW, this.imagePosition.x);
+                this.imagePosition.x = Math.min(0, this.imagePosition.x);
+            }
+
+
+
+
+            var maxH;
+            if (scaledH < $(window).height()) {
+                maxH = $(window).height() - scaledH;
+                this.imagePosition.y = Math.max(0, this.imagePosition.y);
+                this.imagePosition.y = Math.min(maxH, this.imagePosition.y);
+            }
+            else {
+                maxH = (-photo.naturalHeight * this.imageScale) + $(window).height();
+                this.imagePosition.y = Math.max(maxH, this.imagePosition.y);
+                this.imagePosition.y = Math.min(0, this.imagePosition.y);
+            }
+
+             /*
+            var maxH = (-photo.naturalHeight * this.imageScale) + $(window).height();
+
+            if ( maxW > 0 ) {
+                this.imagePosition.x = Math.min(maxW, this.imagePosition.x);
+            }
+            else {
+            }
+
+            this.imagePosition.y = Math.max(maxH, this.imagePosition.y);           */
+
+            //console.log(this.imagePosition.x + ", " + this.imagePosition.y + " x:" + this.imageScale + ' scaled: '+photo.naturalWidth* this.imageScale + ", " + photo.naturalHeight* this.imageScale)
+        }
+
+        //console.log(this.imageScale);
+
+        this.imageContainer.css('-webkit-transform-origin', (this.imagePosition.x+this.pendingCenter.x)+' '+(this.imagePosition.y+this.pendingCenter.y) );
+
+        this.imageContainer.css('-webkit-transform', 'matrix('+this.imageScale+',0,0,'+this.imageScale+','+this.imagePosition.x+','+this.imagePosition.y+')' );
 
         //console.log( css )
         //}

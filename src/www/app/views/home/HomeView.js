@@ -98,6 +98,14 @@ window.HomeView = Backbone.View.extend({
         this.model.list = result.rows;
         this.render();
         window.viewNavigator.resetScroller();
+
+        //defer until after render & dom painted
+        setTimeout( function() {
+            var emulated = window.tinyHippos != undefined;
+            if (!emulated) {
+                navigator.splashscreen.hide();
+            }
+        }, 1);
     },
 
     addNewList: function(event) {
