@@ -349,11 +349,12 @@ ViewNavigator.prototype.resetScroller = function() {
 		}
 		if ( id && !(currentViewDescriptor && currentViewDescriptor.scroll === false)) {
 			var self = this;
-			setTimeout( function() { 
+
+            //setTimeout( function() {
 			    
                 //use this to maintain scroll position when scroller is destroyed
                 var targetDiv = $( $("#"+id ).children()[0] );
-                //var scrollY = targetDiv.attr( "scrollY" );
+                var scrollY = targetDiv.attr( "scrollY" );
                 var originalTopMargin = targetDiv.attr( "originalTopMargin" );
                 if ( scrollY != undefined && scrollY != "" ){
                   //  console.log( "resetScroller scrollY: " + scrollY)
@@ -365,7 +366,7 @@ ViewNavigator.prototype.resetScroller = function() {
 			    if ( scrollY != undefined && scrollY != "" ) {
 			        self.scroller.scrollTo( 0, parseInt( scrollY ) );
 			    }
-			}, 10 );
+			//}, 10 );
 			//this.scroller = new iScroll( id );
 		}
     }
