@@ -222,7 +222,11 @@ window.DatabaseManager = function() {
                                 note.ID +
                                 ')';
 
-                            transx.executeSql(sql, [], function(){} );
+                            var asset = note.images[x];
+                            transx.executeSql(sql, [],  function(tx, results){
+                                //console.log(results);
+                                asset.ID = results.insertId;
+                            } );
                         }
                     }
                     for (var x=0; x<note.soundclips.length; x++) {
@@ -234,7 +238,11 @@ window.DatabaseManager = function() {
                                 note.ID +
                                 ')';
 
-                            transx.executeSql(sql, [], function(){} );
+                            var asset = note.soundclips[x];
+                            transx.executeSql(sql, [],  function(tx, results){
+                                //console.log(results);
+                                asset.ID = results.insertId;
+                            } );
                         }
                     }
                 }, self.errorHandler);

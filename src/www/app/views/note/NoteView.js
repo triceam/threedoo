@@ -242,17 +242,18 @@ window.NoteView = Backbone.View.extend({
         })
         this.deleteModal.bind("deleted", function(event){
 
-            var id =target.attr("id");
+            var src =target.attr("src");
             var asset = undefined;
             for (var x=0; x< self.model.soundclips.length; x++){
-                if(self.model.soundclips[x].ID == id) {
+                if(self.model.soundclips[x].REF == src) {
                     asset = self.model.soundclips[x];
                 }
             }
             window.DatabaseManager.instance.deleteAudio(asset, function(){
 
-                self.model.soundclips[x] = _.without( self.model.soundclips, asset );
+                self.purgeModel();
                 target.remove();
+                window.viewNavigator.refreshScroller();
             });
         });
         this.deleteModal.bind("cancel", function(event){
