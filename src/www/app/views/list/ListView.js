@@ -26,6 +26,15 @@ window.ListView = Backbone.View.extend({
             },100);
         }
 
+        this.hideViewCallback = function() {
+
+            var buttons = self.$el.find(".footer button");
+            var mainButton = self.$el.find("#actionsButton");
+
+            buttons.addClass("hiddenButton");
+            mainButton.removeClass("close");
+        }
+
         this.listItemClick = function(event){
             return self.onListItemClick(event);
         };

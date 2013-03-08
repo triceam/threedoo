@@ -655,6 +655,11 @@ ul {
     position: relative;
     color: #053d49;
     font-size: 14px;
+
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display:block;
 }
 
 .dataList li.row0 {
@@ -695,6 +700,12 @@ ul {
     position: absolute;
     left: 10px;
     top: 15px;
+
+    max-width:85%;
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display:block;
 }
 
 .right {
