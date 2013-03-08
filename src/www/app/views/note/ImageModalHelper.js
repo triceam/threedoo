@@ -38,7 +38,7 @@ window.ImageModalHelper = function( note, callback ){
     }
 
     this.imageCaptureError = function(message) {
-        alert(message);
+        //alert(message);
         this.onModalClick(event);
     }
 

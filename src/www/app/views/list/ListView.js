@@ -443,7 +443,7 @@ window.ListView = Backbone.View.extend({
         this.deleteModal.unbind("deleted");
         this.deleteModal.unbind("cancel");
         this.deleteModal = undefined;
-        alert("cancelled");
+        //alert("cancelled");
     },
 
     onCheckboxTap: function(event) {

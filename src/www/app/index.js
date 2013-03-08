@@ -67,7 +67,7 @@ function init() {
             this.target = target;
             this.useCapture = useCapture;
             this.MAX_TAP_FLOAT = 8;
-            this.MAX_TAP_TIME = 400;
+            this.MAX_TAP_TIME = 800;
             this.MIN_ELAPSED_TIME = 350;
 
 

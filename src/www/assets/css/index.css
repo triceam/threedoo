@@ -657,8 +657,6 @@ ul {
     position: relative;
     color: #053d49;
     font-size: 14px;
-
-    overflow:hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     display:block;
@@ -756,6 +754,7 @@ ul {
     background: url('../images/buttons/delete.png');
 }
 
+.listDelete:active,
 .listDelete.active {
     background: url('../images/buttons/delete_active.png');
 }
