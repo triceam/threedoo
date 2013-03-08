@@ -131,8 +131,11 @@ window.HomeView = Backbone.View.extend({
     listItemClick: function (event) {
         var target = $(event.target);
 
+        var loopBlocker = 0;
         while ( !target.is("li") ){
             target = target.parent();
+            loopBlocker++;
+            if (loopBlocker > 5) return;
         }
 
         target.addClass("selected");

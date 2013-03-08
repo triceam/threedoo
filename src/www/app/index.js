@@ -85,11 +85,12 @@ function init() {
 
             this.touchStart = function( event ) {
                 var element = $(event.target);
+                //var id = element.attr("id");
+
                 element.addClass("active");
-                var id = element.attr("id");
                 self.startTime = new Date().getTime();
 
-                //console.log(event.type + " " + id + " " + self.startTime.toString())
+                console.log(event.type + " " + self.startTime.toString())
 
                 var touchItem = (event.targetTouches == undefined) ? event : event.targetTouches[0];
                 self.startX = touchItem.pageX;
@@ -108,7 +109,7 @@ function init() {
 
             this.touchMove = function( event ) {
                 var element = $(event.target);
-                var id = element.attr("id");
+                //var id = element.attr("id");
 
                 var touchItem = (event.targetTouches == undefined) ? event : event.targetTouches[0];
                 self.endX = touchItem.pageX;
@@ -118,7 +119,7 @@ function init() {
             this.touchEnd = function( event ) {
                 var element = $(event.target);
                 element.removeClass("active");
-                var id = element.attr("id");
+                //var id = element.attr("id");
                 var now = new Date().getTime();
                 var diff = now - self.startTime;
 
@@ -149,9 +150,9 @@ function init() {
 
                             //the timeout is to prevent duplicate touch events (this does happen)
                             //but shorter than 300 ms delay by operating system
-                            clearTimeout(self.triggerTimeout);
+                            //clearTimeout(self.triggerTimeout);
                             //self.triggerTimeout = setTimeout(function(){
-                                //console.log("touchend " + id + " " + self.startTime.toString())
+                                console.log("touchend " + self.startTime.toString())
                                 //element.trigger("tap");
 
                                 // Synthesise a click event, with an extra attribute so it can be tracked
@@ -170,7 +171,7 @@ function init() {
             }
 
             target.addEventListener( self.START_EVENT, self.touchStart, false );
-            //return;//self.killEvent(event);
+            //return killEvent(event);
         }
 
 
