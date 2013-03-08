@@ -182,7 +182,7 @@ window.ListView = Backbone.View.extend({
 
 
     receiveNotes: function (result) {
-        console.log(result);
+        //console.log(result);
         this.model.notes = result.rows;
         this.model.loading = false;
         this.render();
@@ -388,7 +388,7 @@ window.ListView = Backbone.View.extend({
     },
 
     onLiButtonTap: function(event) {
-        console.log("tapped");
+        //console.log("tapped");
         var self = this;
         var target = $(event.target);
 

@@ -362,7 +362,7 @@ ViewNavigator.prototype.resetScroller = function() {
                     var cssString = "translate3d(0px, "+(originalTopMargin).toString()+"px, 0px)";
                     targetDiv.css( "-webkit-transform", cssString );
                 }
-			    self.scroller = new iScroll( id ); 
+			    self.scroller = new iScroll( id, {scrollbarClass:"hiddenScrollbar"});
 			    if ( scrollY != undefined && scrollY != "" ) {
 			        self.scroller.scrollTo( 0, parseInt( scrollY ) );
 			    }

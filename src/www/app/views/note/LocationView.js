@@ -46,7 +46,11 @@ window.LocationView = Backbone.View.extend({
     },
 
     events:{
-        "click li": "onListItemClick"
+        "click li": "onListItemClick",
+        "click #mapIt": "onMapItClick",
+        "click #callNow": "onCallNowClick",
+        "click #twitter": "onTwitterClick",
+        "click #foursquare": "onFoursquareClick"
     },
 
 
@@ -170,28 +174,23 @@ window.LocationView = Backbone.View.extend({
             self.model.location_state = "COMPLETE";
             window.viewNavigator.replaceView( new LocationView({ model:self.model }) );
         });
+    },
 
+    onMapItClick: function(event) {
+       NativeUtil.getDirections( this.model.location_data.location.lat, this.model.location_data.location.lng );
+    },
 
+    onCallNowClick: function(event) {
+        NativeUtil.openExternalURLNoConfirm( "tel:" + this.model.location_data.contact.phone );
+    },
 
-        /*var note;
-        for ( var x=0; x<this.model.notes.length; x++ ) {
-            if ( id == this.model.notes[x].ID ){
-                note = this.model.notes[x];
-                break;
-            }
-        }
-        if( note ) {
-            this.pendingNote = undefined;
+    onTwitterClick: function(event) {
+        NativeUtil.openExternalURL( "http://twitter.com/" + this.model.location_data.contact.twitter );
+    },
 
-            var cb = function() {
-                window.viewNavigator.pushView( new NoteView({model:note}) );
-            }
-
-            window.DatabaseManager.instance.getNote(note, cb);
-        }      */
-},
-
-
+    onFoursquareClick: function(event) {
+        NativeUtil.openExternalURL( this.model.location_data.canonicalUrl );
+    }
 
 
 

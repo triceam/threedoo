@@ -391,7 +391,7 @@ body {
 }
 
 
-
+.defaultButton,
 .footerOptions .defaultButton {
     color:#515557;
     text-shadow: 0px 1px 2px #FFF;
@@ -399,6 +399,7 @@ body {
     border-width: 10px;
 }
 
+.defaultButton.active,
 .footerOptions .defaultButton:active,
 .footerOptions .defaultButton.active {
     border-image: url('../images/buttons/buttonskin_default_active.png') 10 10 10 fill stretch;
@@ -625,16 +626,23 @@ body {
     background: url('../images/buttons/location_active.png');
 }
 
-.dataList.geoList li {
-    padding-top: 10px;
-    padding-left: 10px;
+.liContent {
+    padding: 9px 8px;
     font-size: 11px;
     color: #125d6d;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow:hidden;
 }
 
-.dataList.geoList li div{
+.liContent #name {
+    padding:0px;
+    margin:0px;
     font-size: 14px;
     color: #053d49;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow:hidden;
 }
 
 
@@ -646,6 +654,7 @@ ul {
     margin: 0px;
 }
 
+.geoList li,
 .dataList li {
     background-color: #8ce4f8;
     width: 100%;
@@ -699,7 +708,7 @@ ul {
 .left {
     position: absolute;
     left: 10px;
-    top: 15px;
+    top: 16px;
 
     max-width:85%;
     overflow:hidden;
@@ -708,10 +717,24 @@ ul {
     display:block;
 }
 
+.listContent .checkbox {
+    position: absolute;
+    left: 2px;
+    top: 6px;
+    width:30px;
+    height:30px;
+}
+
+.left.checkBoxListLabel {
+    top: 16px;
+    left: 42px;
+    max-width:75%;
+}
+
 .right {
     position: absolute;
     right: 13px;
-    top:15px;
+    top:16px;
     text-align: right;
 }
 
@@ -760,6 +783,79 @@ ul {
 }
 
 
+.locationName {
+    color: #FFF;
+    font-weight: bold;
+    background: #075f73;
+    border:1px solid #005669;
+    font-size: 16px;
+    margin: -10px -10px 0px -10px;
+    padding:10px;
+    position: relative;
+}
+
+.locationClassification {
+
+    position: absolute;
+    text-align: right;
+    top:2px;
+    right:2px;
+}
+
+.locationMap img {
+    opacity: 0;
+    transition: opacity 500ms;
+    -webkit-transition: opacity 500ms;
+}
+
+.locationMap {
+    height:120px;
+    background: #097c96;
+    margin-right: -10px;
+    margin-left: -10px;
+    border-bottom:1px solid #005669;
+    box-shadow: inset 0px 2px 0px #65cce4;
+}
+
+.locationAddress {
+    padding-top: 10px;
+    position:relative;
+    min-height: 54px;
+}
+
+.locationPhone {
+    padding-top: 14px;
+    position:relative;
+    min-height: 54px;
+}
+
+.rightButton {
+    position: absolute;
+    top:10px;
+    right:0px;
+    width:100px;
+    height:44px;
+    background:none;
+}
+
+.topBorder {
+    border-top:1px solid #005669;
+}
+
+
+.locActionButton {
+    width:100%;
+    padding:0px;
+    font-size: 14px;
+    text-align: left;
+    height:44px;
+    margin-bottom: 10px;
+    background:none;
+}
+
+
+
+
 @-webkit-keyframes slideIn {
     from {
         top: 75px;
@@ -779,4 +875,9 @@ ul {
     width: 0px;
     height:0px;
     position: absolute;
+}
+
+.hiddenScrollbar {
+    display:none;
+    visibility: hidden;
 }

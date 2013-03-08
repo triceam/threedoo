@@ -45,6 +45,9 @@ var app = {
         new DatabaseManager();
 
         //document.addEventListener("backbutton", onBackKey, false);
+
+
+
     }
 };
 
@@ -90,7 +93,7 @@ function init() {
                 element.addClass("active");
                 self.startTime = new Date().getTime();
 
-                console.log(event.type + " " + self.startTime.toString())
+                //console.log(event.type + " " + self.startTime.toString())
 
                 var touchItem = (event.targetTouches == undefined) ? event : event.targetTouches[0];
                 self.startX = touchItem.pageX;
@@ -152,7 +155,7 @@ function init() {
                             //but shorter than 300 ms delay by operating system
                             //clearTimeout(self.triggerTimeout);
                             //self.triggerTimeout = setTimeout(function(){
-                                console.log("touchend " + self.startTime.toString())
+                               // console.log("touchend " + self.startTime.toString())
                                 //element.trigger("tap");
 
                                 // Synthesise a click event, with an extra attribute so it can be tracked
@@ -160,7 +163,7 @@ function init() {
                                 clickEvent.initMouseEvent('click', true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY, false, false, false, false, 0, null);
                                 clickEvent.forwardedTouchEvent = true;
                                 element.get(0).dispatchEvent(clickEvent);
-                                  console.log("dispatched")
+                                //  console.log("dispatched")
                             //}, 50);
                         }
 
@@ -177,7 +180,7 @@ function init() {
 
 
 
-        if ( 'ontouchstart' in window) {
+        if ( true ) {//} 'ontouchstart' in window) {
 
             HTMLElement.prototype.__addEventListener = HTMLElement.prototype.addEventListener;
             HTMLElement.prototype.__removeEventListener = HTMLElement.prototype.removeEventListener;

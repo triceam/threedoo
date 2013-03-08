@@ -1,12 +1,12 @@
 <% if ( notes.length > 0 ) { %>
-    <ul class="dataList">
+    <ul id="incompleteList" class="dataList">
         <% _.each(notes, function(item) { %>
 
             <li id="<%= item.ID %>">
                 <div class="listContent">
 
-                    <span class="left">
-                        <input type="checkbox" <% if (item.COMPLETE == true || item.COMPLETE == "TRUE") { %>checked<% } %> />
+                    <input class="checkbox" type="checkbox" <% if (item.COMPLETE == true || item.COMPLETE == "TRUE") { %>checked<% } %> />
+                    <span class="left checkBoxListLabel">
                         <%= item.DETAIL %>
                     </span>
                     <span class="right_img">
@@ -58,21 +58,14 @@
                             <% } %>
 
                             <span class="previewWrapper">
-                                <img width="34" height="34" src="assets/images/microphone_attachment.png" />
+                                <img
+                                    width="34" height="34"
+                                    src="assets/images/microphone_attachment.png" />
                             </span>
 
 
 
                         <% } %>
-
-
-
-
-
-
-
-
-
                     </span>
                     <button class="listDelete" id="<%= item.ID %>"></button>
 
@@ -80,6 +73,9 @@
             </li>
 
         <% }) %>
+    </ul>
+    <ul id="completeList" class="dataList">
+
     </ul>
 <% } else { %>
     No notes yet!

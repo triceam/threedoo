@@ -15,7 +15,12 @@
         var i = 0;
         _.each(images, function(item) { %>
 
-        <li id="<%= item.ID %>" class="photoItem"><img class="photoThumbnail" src="<%= item.REF %>"  index="<%= i %>"/></li>
+        <li id="<%= item.ID %>" class="photoItem">
+            <img
+                class="photoThumbnail"
+                src="<%= item.REF %>"
+                index="<%= i %>" />
+        </li>
 
         <% i ++;
         }) %>

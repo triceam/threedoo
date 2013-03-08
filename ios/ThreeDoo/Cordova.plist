@@ -28,7 +28,8 @@
 	<string>cloud</string>
 	<key>ExternalHosts</key>
 	<array>
-		<string></string>
+		<string>*.openstreetmap.de</string>
+		<string>*.openstreetmap.org</string>
 		<string>*.foursquare.com</string>
 	</array>
 	<key>Plugins</key>

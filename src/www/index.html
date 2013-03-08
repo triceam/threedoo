@@ -30,45 +30,6 @@
     <body>
         loading...
 
-        <!-- LIBS -->
-        <script src="libs/jquery.js"></script>
-        <script src="libs/jquery.animate-enhanced.js"></script>
-        <script src="libs/raf.js"></script>
-        <script src="libs/iscroll.js"></script>
-        <script src="libs/underscore.js"></script>
-        <script src="libs/backbone.js"></script>
-        <script src="libs/binaryajax.js"></script>
-        <script src="libs/exif.js"></script>
-        <script src="libs/app-ui/viewnavigator/viewnavigator.js"></script>
-
-        <script type="text/javascript" src="cordova-2.2.0.js"></script>
-
-        <script type="text/javascript" src="app/model/DatabaseManager.js"></script>
-        <script type="text/javascript" src="app/model/DataObjects.js"></script>
-
-        <script type="text/javascript" src="app/util/TemplateManager.js"></script>
-        <script type="text/javascript" src="app/util/ImageCapture.js"></script>
-        <script type="text/javascript" src="app/util/AudioCapture.js"></script>
-        <script type="text/javascript" src="app/util/FileUtil.js"></script>
-
-        <script type="text/javascript" src="app/views/common/ModalView.js"></script>
-        <script type="text/javascript" src="app/views/common/SliderListItem.js"></script>
-        <script type="text/javascript" src="app/views/home/HomeView.js"></script>
-        <script type="text/javascript" src="app/views/list/ListView.js"></script>
-        <script type="text/javascript" src="app/views/list/RenameListView.js"></script>
-        <script type="text/javascript" src="app/views/common/DeleteItemModalView.js"></script>
-        <script type="text/javascript" src="app/views/note/NoteView.js"></script>
-        <script type="text/javascript" src="app/views/note/AudioModalHelper.js"></script>
-        <script type="text/javascript" src="app/views/note/ImageModalHelper.js"></script>
-        <script type="text/javascript" src="app/views/note/PhotoDetailView.js"></script>
-        <script type="text/javascript" src="app/views/note/LocationView.js"></script>
-
-
-        <script type="text/javascript" src="app/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
-
         <div id="precache">
             <div id="actionsButton" />
             <div id="actionsButton" class="active" />
@@ -121,5 +82,47 @@
             <div class="listDelete" />
             <div class="listDelete.active" />
         </div>
+
+
+        <!-- LIBS -->
+        <script src="libs/jquery.js"></script>
+        <script src="libs/jquery.animate-enhanced.js"></script>
+        <script src="libs/raf.js"></script>
+        <script src="libs/iscroll.js"></script>
+        <script src="libs/underscore.js"></script>
+        <script src="libs/backbone.js"></script>
+        <script src="libs/binaryajax.js"></script>
+        <script src="libs/exif.js"></script>
+        <script src="libs/app-ui/viewnavigator/viewnavigator.js"></script>
+
+        <script type="text/javascript" src="cordova-2.2.0.js"></script>
+
+        <script type="text/javascript" src="app/model/DatabaseManager.js"></script>
+        <script type="text/javascript" src="app/model/DataObjects.js"></script>
+
+        <script type="text/javascript" src="app/util/TemplateManager.js"></script>
+        <script type="text/javascript" src="app/util/ImageCapture.js"></script>
+        <script type="text/javascript" src="app/util/AudioCapture.js"></script>
+        <script type="text/javascript" src="app/util/FileUtil.js"></script>
+        <script type="text/javascript" src="app/util/NativeUtil.js"></script>
+
+        <script type="text/javascript" src="app/views/common/ModalView.js"></script>
+        <script type="text/javascript" src="app/views/common/SliderListItem.js"></script>
+        <script type="text/javascript" src="app/views/home/HomeView.js"></script>
+        <script type="text/javascript" src="app/views/list/ListView.js"></script>
+        <script type="text/javascript" src="app/views/list/RenameListView.js"></script>
+        <script type="text/javascript" src="app/views/common/DeleteItemModalView.js"></script>
+        <script type="text/javascript" src="app/views/note/NoteView.js"></script>
+        <script type="text/javascript" src="app/views/note/AudioModalHelper.js"></script>
+        <script type="text/javascript" src="app/views/note/ImageModalHelper.js"></script>
+        <script type="text/javascript" src="app/views/note/PhotoDetailView.js"></script>
+        <script type="text/javascript" src="app/views/note/LocationView.js"></script>
+
+
+        <script type="text/javascript" src="app/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+
     </body>
 </html>
