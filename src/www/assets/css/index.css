@@ -385,7 +385,8 @@ body {
      border-width: 10px;
  }
 
-.footerOptions .warningButton:active {
+.footerOptions .warningButton:active,
+.footerOptions .warningButton.active {
     border-image: url('../images/buttons/buttonskin_warning_active.png') 10 10 10 fill stretch;
 }
 
@@ -398,7 +399,8 @@ body {
     border-width: 10px;
 }
 
-.footerOptions .defaultButton:active {
+.footerOptions .defaultButton:active,
+.footerOptions .defaultButton.active {
     border-image: url('../images/buttons/buttonskin_default_active.png') 10 10 10 fill stretch;
 }
 
@@ -770,4 +772,12 @@ ul {
     from {
         opacity: 0;
     }
+}
+
+
+#precache {
+    visibility: hidden;
+    width: 0px;
+    height:0px;
+    position: absolute;
 }
