@@ -140,6 +140,19 @@ window.ListView = Backbone.View.extend({
                 handler:this.deleteButtonClick
             });
 
+            var imgs = this.$el.find("img");
+            imgs.lazyload({
+                effect       : "fadeIn"
+            });
+
+            self.scroller.options.onScrollEnd = function () {
+                self.$el.trigger('scroll');
+            }
+            setTimeout( function() {
+                self.$el.trigger('scroll');
+                console.log("triggering scroll");
+            }, 1000);
+
             var ul = this.$el.find("ul");
 
             ul.unbind("click", self.listItemClick);

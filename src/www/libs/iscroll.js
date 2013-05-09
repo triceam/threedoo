@@ -259,9 +259,27 @@ iScroll.prototype = {
 		setTimeout(function () { that.refresh(); }, isAndroid ? 200 : 0);
 	},
 
-	_pos: function (x, y) {
-		x = this.hScroll ? x : 0;
-		y = this.vScroll ? y : 0;
+    _pos: function(x,y) {
+        x = this.hScroll ? x : 0;
+        y = this.vScroll ? y : 0;
+
+        this.x = x;
+        this.y = y;
+
+        var that= this;
+
+        cancelFrame( this.__nextFrame );
+
+        this.__nextFrame = nextFrame( function(){
+            that._render()
+        } );
+    },
+
+	_render: function () {
+
+        var x = this.x;
+        var y = this.y;
+
 
 		if (this.options.useTransform) {
 			this.scroller.style[vendor + 'Transform'] = trnOpen + x + 'px,' + y + 'px' + trnClose + ' scale(' + this.scale + ')';
@@ -271,9 +289,6 @@ iScroll.prototype = {
 			this.scroller.style.left = x + 'px';
 			this.scroller.style.top = y + 'px';
 		}
-
-		this.x = x;
-		this.y = y;
 
 		this._scrollbarPos('h');
 		this._scrollbarPos('v');
@@ -865,7 +880,7 @@ iScroll.prototype = {
 	destroy: function () {
 		var that = this;
 
-		that.scroller.style[vendor + 'Transform'] = '';
+		//that.scroller.style[vendor + 'Transform'] = '';
 
 		// Remove the scrollbars
 		that.hScrollbar = false;

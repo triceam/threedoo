@@ -63,6 +63,8 @@ window.HomeView = Backbone.View.extend({
 
     render:function (eventName) {
         var template = templates.homeView;
+
+
         this.$el.html(template(this.model));
 
 

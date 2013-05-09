@@ -362,10 +362,13 @@ ViewNavigator.prototype.resetScroller = function() {
                     var cssString = "translate3d(0px, "+(originalTopMargin).toString()+"px, 0px)";
                     targetDiv.css( "-webkit-transform", cssString );
                 }
-			    self.scroller = new iScroll( id, {scrollbarClass:"hiddenScrollbar"});
-			    if ( scrollY != undefined && scrollY != "" ) {
-			        self.scroller.scrollTo( 0, parseInt( scrollY ) );
-			    }
+                var y = 0
+                if ( scrollY != undefined && scrollY != "" ) {
+                    y = parseInt( scrollY );
+                }
+
+			    self.scroller = new iScroll( id, {scrollbarClass:"hiddenScrollbar", x:0, y:y});
+
 			//}, 10 );
 			//this.scroller = new iScroll( id );
 		}

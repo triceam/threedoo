@@ -12,13 +12,13 @@ window.DatabaseManager = function() {
 
         console.log("CREATING TABLES")
         var self= this;
-        this.db.transaction(self.createTables, self.errorHandler, function(){
+        this.db.transaction(self.createTables, self.handleError, function(){
             //alert("success");
 
             $(window).trigger("databaseReady");
             /*
             console.log("POPULATING SAMPLE DATA")
-            self.db.transaction(self.populateSampleData, self.errorHandler, function(){
+            self.db.transaction(self.populateSampleData, self.handleError, function(){
                 alert("success");
                 $(window).trigger("databaseReady");
             });
@@ -122,7 +122,7 @@ window.DatabaseManager = function() {
         this.execute( sql, cb );
     }
 
-    this.errorHandler = function(err) {
+    this.handleError = function(err) {
         console.log( err );
         alert( err );
     }
@@ -245,7 +245,7 @@ window.DatabaseManager = function() {
                             } );
                         }
                     }
-                }, self.errorHandler);
+                }, self.handleError);
             }
             if ( cb != undefined ) {
                 cb(tx, results);
@@ -320,7 +320,7 @@ window.DatabaseManager = function() {
                 var sql="DELETE FROM NOTES WHERE ID =" + note.ID;
                 tx.executeSql(sql);
 
-            }, self.errorHandler, function(){
+            }, self.handleError, function(){
 
                 note.ID = -1;
                 if ( callback ) {
@@ -364,7 +364,7 @@ window.DatabaseManager = function() {
         var self = this;
         this.db.transaction( function(tx) {
             tx.executeSql(sql, [], cb );
-        }, self.errorHandler);
+        }, self.handleError);
     }
 
     this.generateResultCallback = function (callback) {

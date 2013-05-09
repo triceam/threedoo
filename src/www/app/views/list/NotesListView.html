@@ -44,21 +44,29 @@
                         <% if ( imgcount > 0 ) { %>
 
                             <% if ( imgcount > 1 || audio > 0 ) { %>
-                                <img src="assets/images/paperclip_small.png" />
+                                <img
+                                    width="10" height="34"
+                                    src="assets/images/paperclip_small.png" />
                             <% } %>
 
                             <span class="previewWrapper">
-                                <img class="previewImage" src="<%= img %>" />
+                                <img
+                                    class="previewImage"
+                                    width="34" height="34"
+                                    data-original="<%= img %>" />
                             </span>
 
                         <% } else if ( audio > 0 ) { %>
 
                             <% if ( audio > 1 ) { %>
-                                <img src="assets/images/paperclip_small.png" />
+                                <img
+                                    width="10" height="34"
+                                    src="assets/images/paperclip_small.png" />
                             <% } %>
 
                             <span class="previewWrapper">
                                 <img
+                                    class="previewImage"
                                     width="34" height="34"
                                     src="assets/images/microphone_attachment.png" />
                             </span>

@@ -64,6 +64,7 @@ function killEvent(event) {
 function init() {
     var emulated = window.tinyHippos != undefined;
     if ( true ){
+
         window.lastTouchTime = 0;
         window.TouchHandler = function (target, listener, useCapture){
             var self = this;

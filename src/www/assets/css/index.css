@@ -760,6 +760,8 @@ ul {
     max-height: 34px;
     display:inline-block;
     overflow: hidden;
+    background-color: #0C9FC0;
+    border:none;
 }
 
 .listContent {

@@ -124,8 +124,13 @@ window.SliderListItem = function(options) {
             var currentPosition = jQuery.data(rawTarget, "currentPosition");
 
             var diff = {
-                x: currentPosition.x - touch.screenX,
-                y: currentPosition.y - touch.screenY
+                x: currentPosition.x,
+                y: currentPosition.y,
+            }
+
+            if ( !isNaN( touch.screenX ) ){
+                diff.x -= touch.screenX;
+                diff.y -= touch.screenY;
             }
 
             var translate = target.css("-webkit-transform");
