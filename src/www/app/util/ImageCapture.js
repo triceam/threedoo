@@ -11,7 +11,8 @@ window.ImageCapture = {
 
         navigator.camera.getPicture( complete,error, { quality: this.quality,
             destinationType: navigator.camera.DestinationType.FILE_URI,
-            sourceType: navigator.camera.PictureSourceType.CAMERA });
+            sourceType: navigator.camera.PictureSourceType.CAMERA,
+            correctOrientation: true});
 
 
 

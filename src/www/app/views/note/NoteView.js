@@ -64,7 +64,6 @@ window.NoteView = Backbone.View.extend({
 
         var template = templates.noteView;
         this.$el.html(template(this.model));
-
     },
 
     purgeModel:function() {
@@ -144,7 +143,9 @@ window.NoteView = Backbone.View.extend({
     mediaCaptureSuccess : function( note ) {
 
         this.render();
-        window.viewNavigator.resetScroller();
+        defer(function(){
+            window.viewNavigator.resetScroller();
+        });
     },
 
     onPhotoClick: function (event) {

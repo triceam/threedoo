@@ -15,15 +15,26 @@ window.RenameListView = Backbone.View.extend({
         var self = this;
 
 
-        this.shouldChangeView = function() {
+        /*this.shouldChangeView = function() {
 
             return !self.changed;
-        }
+        }  */
+    },
+
+    animationComplete: function() {
+
+        var self = this;
+        defer(function(){
+            //force selection at the end of text
+            console.log("focusing");
+            var input = self.$el.find("#name");
+            input.focus();
+        });
     },
 
     events:{
         "keypress input":"onInputKeyPress",
-        "blur input":"renameNewList",
+        //"blur input":"renameNewList",
     },
 
     render:function (eventName) {

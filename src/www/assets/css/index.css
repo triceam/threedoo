@@ -171,7 +171,7 @@ body {
 
 
 .footer {
-    position: absolute;
+    position: fixed;
     left: 0px;
     right:0px;
     bottom:0px;
@@ -476,6 +476,8 @@ body {
 }
 
 .photoThumbnail {
+    min-height: 34px;
+    min-width: 34px;
     max-width: 200px;
     max-height: 200px;
 }

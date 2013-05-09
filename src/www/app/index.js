@@ -61,6 +61,10 @@ function killEvent(event) {
     return false;
 }
 
+function defer(func) {
+    setTimeout( func, 250 );
+}
+
 function init() {
     var emulated = window.tinyHippos != undefined;
     if ( true ){

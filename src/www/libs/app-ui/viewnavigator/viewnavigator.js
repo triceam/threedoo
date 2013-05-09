@@ -390,6 +390,12 @@ ViewNavigator.prototype.animationCompleteHandler = function(removalTarget, heade
 	return function() {
 		self.animating = false;
         self.resetScroller();
+
+        var currentViewDescriptor = self.history[ self.history.length-1 ];
+        if (currentViewDescriptor.animationComplete) {
+            currentViewDescriptor.animationComplete();
+        }
+
 		if ( removalTarget ) {
 			removalTarget.unbind( "click" );
 			removalTarget.detach();
@@ -402,7 +408,7 @@ ViewNavigator.prototype.animationCompleteHandler = function(removalTarget, heade
 }
 
 ViewNavigator.prototype.resizeContent = function(event) {
-
+    console.log("resizeContent");
 	var targetWidth = this.parent.width();
 	if ( this.headerContent )
 		this.headerContent.width( targetWidth );

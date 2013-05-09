@@ -53,6 +53,15 @@ window.ListView = Backbone.View.extend({
         });
     },
 
+    animationComplete: function() {
+
+        var self = this;
+        defer(function() {
+            self.$el.trigger('scroll');
+            console.log("triggering scroll");
+        })
+    },
+
     onViewShown: function() {
         if ( this.rendered ) {
 
@@ -113,7 +122,7 @@ window.ListView = Backbone.View.extend({
             this.$el = $(template(model));
 
             setTimeout( function() {
-                self.scroller = new iScroll( "scrollable" );
+                self.scroller = new iScroll( "scrollable", {scrollbarClass:"hiddenScrollbar"} );
             }, 10 );
 
             this.headerActions = $("<div class='topHeaderActionContent' style='min-width:" + ($(window).width()-130) + "px; '><span id='nameSpan' style='max-width:" + ($(window).width()-150) + "px; overflow:hidden; white-space: nowrap; text-overflow: ellipsis; display:inline-block;'>" + this.model.NAME + "</span><img src='assets/images/disclosure.png' /></div>");
@@ -148,10 +157,6 @@ window.ListView = Backbone.View.extend({
             self.scroller.options.onScrollEnd = function () {
                 self.$el.trigger('scroll');
             }
-            setTimeout( function() {
-                self.$el.trigger('scroll');
-                console.log("triggering scroll");
-            }, 1000);
 
             var ul = this.$el.find("ul");
 
@@ -230,6 +235,8 @@ window.ListView = Backbone.View.extend({
             this.modal = undefined;
         }
         //this.$el.find(".modal").removeClass("hidden");
+
+        return killEvent(event);
     },
 
     onModalClick: function(event) {
@@ -245,8 +252,11 @@ window.ListView = Backbone.View.extend({
             this.modal.close();
             this.modal = undefined;
         }
-        //this.$el.find(".modal").addClass("hidden");
-        window.viewNavigator.pushView( new RenameListView({model:this.model}) );
+
+        var self = this;
+        defer( function(){
+            window.viewNavigator.pushView( new RenameListView({model:self.model}) );
+        })
         return killEvent(event);
     },
 
@@ -365,7 +375,10 @@ window.ListView = Backbone.View.extend({
 
         var options = {model:note};
         this.pendingNote = note;
-        window.viewNavigator.pushView( new NoteView(options) );
+
+        defer(function(){
+            window.viewNavigator.pushView( new NoteView(options) );
+        })
     },
 
     onListItemClick: function(event) {

@@ -32,7 +32,8 @@ window.PhotoDetailView = Backbone.View.extend({
 
         this.hideViewCallback = function() {
 
-            self.$el.find("#photo").remove();
+            this.$el.find("#photo").remove();
+            return true;
         }
 
         //  var vendorPrefixes = ["", "-webkit-", "-moz-", "-o-", "-ms-", "-khtml-"];
