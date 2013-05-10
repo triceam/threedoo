@@ -78,6 +78,10 @@ body {
 }
 
 
+.viewNavigator_root {
+    background: #075f73;
+}
+
 .viewNavigator_header {
     background-color: #fff;
     background-image: url('../images/header_background.jpg');

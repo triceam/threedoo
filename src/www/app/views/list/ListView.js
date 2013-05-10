@@ -501,8 +501,36 @@ window.ListView = Backbone.View.extend({
             window.DatabaseManager.instance.saveNote( note );
         }
 
+        var timeout = target.data( "listTimeout" );
+        clearTimeout(timeout);
+
+        var self = this;
+        var timeout = setTimeout( function() {
+            self.updateListItem(target, note);
+        }, 1000 );
+        target.data( "listTimeout", timeout );
+
 
         return killEvent(event);
+    },
+
+    updateListItem: function ( $li, note ) {
+
+        var parent = $li.parent();
+        var parentId = parent.attr( "id" );
+
+        console.log(parentId);
+
+        if ( (note.COMPLETE == true || note.COMPLETE == "TRUE") && parentId == "incompleteList") {
+            $li.detach();
+            this.$el.find( "#completeList").append( $li );
+        }
+
+
+        else if ( !(note.COMPLETE == true || note.COMPLETE == "TRUE") && parentId == "completeList") {
+            $li.detach();
+            this.$el.find( "#incompleteList").append( $li );
+        }
     }
 
 });
