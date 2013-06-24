@@ -1,0 +1,891 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    background-color:#333;
+
+    height:100%;
+    margin:0px;
+    padding:0px;
+    width:100%;
+
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+
+}
+
+.homeView input,
+.renameListView input {
+    width:100%;
+    margin:0px;
+
+    color:#FFF;
+    border-radius: 6px;
+    margin-right: 10px;
+    padding: 10px;
+    background: #075f73;
+    border:1px solid #005669;
+    box-shadow: 0px 2px 0px #65cce4;
+    font-size: 16px;
+}
+
+::-webkit-input-placeholder {
+    color:    #fff;
+}
+
+.inputWrapper {
+    margin: 0px 20px 0px 0px;
+}
+
+.content.noteView,
+.noteView {
+    margin:0px;
+    padding:0px;
+}
+
+.noteContent {
+    padding: 10px 10px 0px 10px;
+    margin-right: 10px;
+}
+
+.noteView textarea {
+    width: 272px;
+    height: 150px;
+    padding:14px;
+    color: #096f86;
+    font-size: 14px;
+}
+
+
+.viewNavigator_root {
+    background: #075f73;
+}
+
+.viewNavigator_header {
+    background-color: #fff;
+    background-image: url('../images/header_background.jpg');
+    background-repeat: repeat-x;
+    height: 45px;
+    color:black;
+}
+
+.viewNavigator_header_title {
+    color:black;
+}
+
+.viewNavigator_headerActions {
+
+}
+
+.viewNavigator_header_backlink {
+    top:0px;
+    left:0px;
+    width:45px;
+    height:44px;
+    border:none;
+    padding:0px;
+    margin: 0px;
+    box-shadow: none;
+    background: url('../images/buttons/backbutton.png');
+}
+
+.viewNavigator_header_backlink.active,
+.viewNavigator_header_backlink:active {
+    background: url('../images/buttons/backbutton_active.png');
+}
+
+
+.viewNavigator_content {
+    top:45px;
+}
+
+#scrollContent,
+.viewNavigator_contentHolder>div:first-child {
+    background-color:#57c2db;
+    background-image: url('../images/background.jpg');
+}
+
+
+#scrollContent,
+.content {
+    padding:10px;
+    overflow:hidden;
+}
+
+.viewNavigator_content .listView,
+.noBackground {
+    background: none;
+}
+
+.topHeaderActionContent {
+    text-align:center;
+    margin-right:60px;
+    text-shadow: 0px 1px #fff;
+    color: #6d6d6d;
+    font-size: 1.15em;
+    padding-top: 4px;
+}
+
+.viewNavigator_header_title {
+    text-shadow: 0  px 1px #fff;
+    color: #6d6d6d;
+    font-size: 1.15em;
+    font-weight: normal;
+}
+
+
+
+
+#scrollable,
+.scrollable {
+    position: absolute;
+    left: 0px;
+    right:0px;
+    bottom:44px;
+    top:0px;
+    /*padding-bottom: 40px;*/
+}
+
+
+#scrollContent,
+.scrollContent {
+    min-height: 100%;
+}
+
+
+.footer {
+    position: fixed;
+    left: 0px;
+    right:0px;
+    bottom:0px;
+    text-align: center;
+}
+
+.footerBar {
+    position: absolute;
+    left: 0px;
+    right:0px;
+    bottom:0px;
+    height:44px;
+    background-image: url('../images/footer_background.png');
+    background-repeat: repeat-x;
+    background-position: bottom left;
+    z-index: 0;
+}
+
+
+.modal {
+    -webkit-animation: fadeIn 500ms;
+    position: absolute;
+    left: 0px;
+    right:0px;
+    bottom:0px;
+    top:0px;
+    background: rgba(9,111,134,0.6);
+    text-align: center;
+}
+
+.modal .options {
+    background-color: #e1f3fd;
+    border: 1px 1px 0px 1px solid #d9d9d9;
+    max-width:50%;
+    margin-left:auto;
+    margin-right:auto;
+}
+.modal .options div {
+    border-bottom: 1px solid #d9d9d9;
+    color: #2f2f2f;
+    font-size: 1.05rem;
+    padding: 0.5rem;
+}
+
+.modal .options div:active {
+    background-color: #f0dafb;
+}
+
+.hidden {
+   display:none;
+}
+
+.footerActionsLayer {
+    position: absolute;
+    left: 0px;
+    right:0px;
+    bottom:0px;
+}
+
+#actionsButton {
+    background: url('../images/footer_main_button.png');
+    width: 68px;
+    height: 65px;
+    border: none;
+    z-index: 99;
+}
+
+
+#actionsButton.active,
+#actionsButton:active {
+    background: url('../images/footer_main_button_down.png');
+}
+
+
+#actionsButton.close {
+    background: url('../images/footer_main_button_close.png');
+    width: 68px;
+    height: 65px;
+    border: none;
+    z-index: 99;
+}
+
+
+#actionsButton.close.active,
+#actionsButton.close:active {
+    background: url('../images/footer_main_button_close_down.png');
+}
+
+
+#footerActionButtonContainer {
+    width: 125px;
+    height: 115px;
+    display: inline-block;
+    position: relative;
+}
+
+.footer #buttonContainer {
+    position: absolute;
+    bottom:22px;
+    left:50%;
+    width:0px;
+    height:0px;
+}
+
+.footer #note,
+.footer #pic,
+.footer #audio {
+    -webkit-transition: all 300ms ease-out;
+    position: absolute;
+    left: -17px;
+    top: -17px;
+    width: 34px;
+    height: 34px;
+    border: none;
+
+}
+
+.footer #note {
+
+    -webkit-transform:translate3d( -45px, -56px, 0px );
+
+    background: url('../images/buttons/pencil.png');
+}
+
+.footer #note.active,
+.footer #note:active {
+    background: url('../images/buttons/pencil_active.png');
+}
+
+.footer #pic {
+    -webkit-transform:translate3d( 0px, -76px, 0px );
+
+    background: url('../images/buttons/camera.png');
+}
+
+.footer #pic.active,
+.footer #pic:active {
+    background: url('../images/buttons/camera_active.png');
+}
+
+.footer #audio {
+    -webkit-transform:translate3d( 45px, -56px, 0px );
+
+    background: url('../images/buttons/mic.png');
+}
+
+.footer #audio.active,
+.footer #audio:active {
+    background: url('../images/buttons/mic_active.png');
+}
+
+
+
+
+
+.footer #note.hiddenButton,
+.footer #audio.hiddenButton,
+.footer #pic.hiddenButton {
+    /*top: 75px;
+    left:45px;*/
+    -webkit-transform:translate3d( 0px, 0px, 0px );
+}
+
+#footerActions,
+.footerActions{
+    /*display: none;*/
+    height: 111px;
+}
+
+
+
+
+
+
+
+
+.footerOptions {
+    position:absolute;
+    bottom: 0px;
+    left:0px;
+    right:0px;
+    background: #e1f3fd;
+    padding: 10px;
+    margin:0px;
+    font-size: 0.9rem;
+}
+
+.footerOptions h4 {
+    font-size: 1.1rem;
+    margin: 5px;
+}
+
+
+.footerOptions p {
+    margin: 5px;
+}
+
+.footerOptions button {
+    width:100%;
+    margin-top:10px;
+    padding: 4px;
+    font-size: 0.75rem;
+    font-weight: normal;
+    background: none;
+}
+
+.footerOptions .warningButton {
+     color:white;
+     text-shadow: 0px 1px 2px #a23028;
+     border-image: url('../images/buttons/buttonskin_warning.png') 10 10 10 fill stretch;
+     border-width: 10px;
+ }
+
+.footerOptions .warningButton:active,
+.footerOptions .warningButton.active {
+    border-image: url('../images/buttons/buttonskin_warning_active.png') 10 10 10 fill stretch;
+}
+
+
+.defaultButton,
+.footerOptions .defaultButton {
+    color:#515557;
+    text-shadow: 0px 1px 2px #FFF;
+    border-image: url('../images/buttons/buttonskin_default.png') 10 10 10 fill stretch;
+    border-width: 10px;
+}
+
+.defaultButton.active,
+.footerOptions .defaultButton:active,
+.footerOptions .defaultButton.active {
+    border-image: url('../images/buttons/buttonskin_default_active.png') 10 10 10 fill stretch;
+}
+
+
+
+
+/* note details */
+
+#addPhotoButton {
+    position: absolute;
+    left:0px;
+    width:144px;
+    height:44px;
+    background: url('../images/buttons/add_photo.png');
+    margin-bottom:10px;
+    margin-right:10px;
+
+}
+#addPhotoButton.active,
+#addPhotoButton:active {
+    background: url('../images/buttons/add_photo_active.png');
+}
+
+#addAudioButton {
+    position: absolute;
+    right:0px;
+    width:145px;
+    height:44px;
+    background: url('../images/buttons/add_sound.png');
+    margin-bottom:10px;
+}
+#addAudioButton.active,
+#addAudioButton:active {
+    background: url('../images/buttons/add_sound_active.png');
+}
+
+#addLocationButton {
+    width:300px;
+    height:44px;
+    background: url('../images/buttons/add_location.png');
+    margin-bottom:10px;
+}
+#addLocationButton.active,
+#addLocationButton:active {
+    background: url('../images/buttons/add_location_active.png');
+}
+
+.noteContent button {
+    color:#515557;
+    text-transform:uppercase;
+    font-size: 12px;
+    padding:0px 0px 0px 32px;
+    margin: 0px;
+    border:none;
+    box-shadow: none;
+    background-repeat: no-repeat;
+}
+
+
+.mediaContainer {
+    background: #3092a9;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+#photos li {
+    text-align: center;
+}
+
+.photoItem {
+    padding-top: 0px;
+}
+
+.photoThumbnail {
+    min-height: 34px;
+    min-width: 34px;
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.audioItem {
+    position:relative;
+    background-color:#8ce4f8;
+    margin:10px;
+    padding:0px;
+    height:48px;
+    text-align: left;
+}
+
+.audioItem #mic {
+    position:absolute;
+    top:12px;
+    left:13px;
+}
+
+.audioItem #playButton {
+    position:absolute;
+    top:11px;
+    left:39px;
+    border:none;
+    width: 25px;
+    height:25px;
+    background-repeat: none;
+    background: url('../images/buttons/play_button.png');
+}
+.audioItem #playButton.active {
+    background: url('../images/buttons/play_button_active.png');
+}
+
+
+.audioItem #playButton.pauseButton {
+    background: url('../images/buttons/pause_button.png');
+}
+.audioItem #playButton.pauseButton.active {
+    background: url('../images/buttons/pause_button_active.png');
+}
+
+.audioItem #audioThumb {
+    position:absolute;
+    top:20px;
+    left:74px;
+    border:none;
+}
+
+.audioItem #audioTrack {
+    position:absolute;
+    top:20px;
+    left:80px;
+    right:55px;
+    height:10px;
+    background-color: #FFF;
+}
+
+.audioItem #audioTrack #progress {
+    background-color: #22af7f;
+    width:0%;
+    height:100%;
+}
+
+.audioItem #deleteButton {
+    position:absolute;
+    top:11px;
+    right:11px;
+    border:none;
+    width: 25px;
+    height:25px;
+    background-repeat: none;
+    background: url('../images/buttons/delete_audio.png');
+}
+.audioItem #deleteButton.active {
+    background: url('../images/buttons/delete_audio_active.png');
+}
+
+
+#photoContainer {
+    position: absolute;
+    top:0px;
+    left:0px;
+    right:0px;
+    bottom: 0px;
+    overflow: hidden;
+    background-color: #333;
+}
+
+#photoContainer #imageContainer {
+
+    position: absolute;
+    top:0px;
+    left:0px;
+}
+
+#photoContainer #photo {
+
+}
+
+
+#photoContainer #focal {
+    background-color: red;
+    width: 20px;
+    height:20px;
+    margin:0px;
+    padding: 0px;
+    position: absolute;
+}
+
+
+
+.deletePhoto {
+    position:absolute;
+    top:0px;
+    right:0px;
+    width:45px;
+    height:44px;
+    border:none;
+    padding:0px;
+    margin: 0px;
+    box-shadow: none;
+    background: url('../images/buttons/delete_image.png');
+}
+
+.deletePhoto.active,
+.deletePhoto:active {
+    background: url('../images/buttons/delete_image_active.png');
+}
+
+
+
+
+.locationButton {
+    position:absolute;
+    top:0px;
+    right:0px;
+    width:45px;
+    height:44px;
+    border:none;
+    padding:0px;
+    margin: 0px;
+    box-shadow: none;
+    background: url('../images/buttons/location.png');
+}
+
+.locationButton.active,
+.locationButton:active {
+    background: url('../images/buttons/location_active.png');
+}
+
+.liContent {
+    padding: 9px 8px;
+    font-size: 11px;
+    color: #125d6d;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow:hidden;
+}
+
+.liContent #name {
+    padding:0px;
+    margin:0px;
+    font-size: 14px;
+    color: #053d49;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow:hidden;
+}
+
+
+
+
+/* LIST STYLES */
+ul {
+    padding: 0px;
+    margin: 0px;
+}
+
+.geoList li,
+.dataList li {
+    background-color: #8ce4f8;
+    width: 100%;
+    height: 48px;
+    display: block;
+    list-style: none;
+    padding:0px 0px 0px 6px;
+    margin: 2px 0px 0px -3px;
+    position: relative;
+    color: #053d49;
+    font-size: 14px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display:block;
+}
+
+.dataList li.row0 {
+    background-color: #c5f1fb;
+}
+
+.dataList li.row1 {
+    background-color: #b2edfa;
+}
+
+.dataList li.row2 {
+    background-color: #9fe8f9;
+}
+
+.dataList li.row3 {
+    background-color: #8ce4f8;
+}
+
+.dataList li.row4 {
+    background-color: #79dff6;
+}
+
+.dataList li.row5 {
+    background-color: #66dbf5;
+}
+
+.dataList li.row6 {
+    background-color: #3fd2f3;
+}
+
+
+.dataList li.selected {
+    background-color: #f0dafb;
+}
+
+
+.left {
+    position: absolute;
+    left: 10px;
+    top: 16px;
+
+    max-width:85%;
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display:block;
+}
+
+.listContent .checkbox {
+    position: absolute;
+    left: 2px;
+    top: 6px;
+    width:30px;
+    height:30px;
+}
+
+.left.checkBoxListLabel {
+    top: 16px;
+    left: 42px;
+    max-width:75%;
+}
+
+.right {
+    position: absolute;
+    right: 13px;
+    top:16px;
+    text-align: right;
+}
+
+.right_img {
+    position: absolute;
+    right: 7px;
+    top:7px;
+    text-align: right;
+}
+
+.previewImage {
+    width:34px;
+    min-height: 34px;
+    min-width: 34px;
+    background-color: #0c9fc0;
+    border:none;
+}
+
+.previewWrapper {
+    width:34px;
+    height:34px;
+    max-width: 34px;
+    max-height: 34px;
+    display:inline-block;
+    overflow: hidden;
+    background-color: #0C9FC0;
+    border:none;
+}
+
+.listContent {
+    position: relative;
+}
+
+.listDelete {
+    -webkit-transform: translate3d(0,0,0);
+    height: 48px;
+    width: 48px;
+    position: absolute;
+    left:100%;
+    display:none;
+    border:none;
+    background: url('../images/buttons/delete.png');
+}
+
+.listDelete:active,
+.listDelete.active {
+    background: url('../images/buttons/delete_active.png');
+}
+
+
+.locationName {
+    color: #FFF;
+    font-weight: bold;
+    background: #075f73;
+    border:1px solid #005669;
+    font-size: 16px;
+    margin: -10px -10px 0px -10px;
+    padding:10px;
+    position: relative;
+}
+
+.locationClassification {
+
+    position: absolute;
+    text-align: right;
+    top:2px;
+    right:2px;
+}
+
+.locationMap img {
+    opacity: 0;
+    transition: opacity 500ms;
+    -webkit-transition: opacity 500ms;
+}
+
+.locationMap {
+    height:120px;
+    background: #097c96;
+    margin-right: -10px;
+    margin-left: -10px;
+    border-bottom:1px solid #005669;
+    box-shadow: inset 0px 2px 0px #65cce4;
+}
+
+.locationAddress {
+    padding-top: 10px;
+    position:relative;
+    min-height: 54px;
+}
+
+.locationPhone {
+    padding-top: 14px;
+    position:relative;
+    min-height: 54px;
+}
+
+.rightButton {
+    position: absolute;
+    top:10px;
+    right:0px;
+    width:100px;
+    height:44px;
+    background:none;
+}
+
+.topBorder {
+    border-top:1px solid #005669;
+}
+
+
+.locActionButton {
+    width:100%;
+    padding:0px;
+    font-size: 14px;
+    text-align: left;
+    height:44px;
+    margin-bottom: 10px;
+    background:none;
+}
+
+
+
+
+@-webkit-keyframes slideIn {
+    from {
+        top: 75px;
+        left:45px;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+}
+
+
+#precache {
+    visibility: hidden;
+    width: 0px;
+    height:0px;
+    position: absolute;
+}
+
+.hiddenScrollbar {
+    display:none;
+    visibility: hidden;
+}

@@ -1,0 +1,40 @@
+
+<div class="content homeView">
+    <div class="inputWrapper">
+        <form>
+            <input type="text" placeholder="Create a new list..." >
+        </form>
+    </div>
+
+    <br/>
+
+    <div>
+    <% if (loading) { %>
+        loading...
+    <% } else { %>
+        <% if ( list.length > 0 ) {
+            var i=0;
+        %>
+            <ul class="dataList">
+            <% _.each(list, function(item) { %>
+
+                <li id="<%= item.ID %>" class="<%= window.HomeView.getStyleFor(i) %>">
+
+                    <div class="listContent">
+
+                        <span class="left"><%= item.NAME %></span>
+                        <span class="right"><%= item.notes == undefined ? item.NOTES : item.notes.length %></span>
+                        <button class="listDelete" id="<%= item.ID %>"></button>
+
+                    </div>
+                </li>
+
+            <% i++ }) %>
+            </div>
+        <% } else { %>
+            No lists yet!
+        <% } %>
+    <% } %>
+    </div>
+
+</div>
