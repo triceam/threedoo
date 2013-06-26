@@ -57,7 +57,10 @@ window.NoteView = Backbone.View.extend({
         "click #addAudioButton": "onAudioButtonClick",
         "click img": "onPhotoClick",
         "click #playButton": "onAudioPlayClick",
-        "click #deleteButton": "onAudioDeleteClick"
+        "click #deleteButton": "onAudioDeleteClick",
+        "click #toggleKeyboard": "toggleKeyboard",
+        "focus #noteContent": "noteContentFocusChange",
+        "blur #noteContent": "noteContentFocusChange"
     },
 
     render:function (eventName) {
@@ -78,6 +81,33 @@ window.NoteView = Backbone.View.extend({
             if ( clip.ID == undefined && clip.REF == undefined ){
                 this.model.soundclips = _.without(this.model.soundclips, clip);
             }
+        }
+    },
+
+    toggleKeyboard: function (event) {
+
+        var textarea = this.$el.find("#noteContent");
+
+        var button = this.$el.find("#toggleKeyboard");
+        if ( button.hasClass( "closeKeyboard" ) ) {
+
+            textarea.blur();
+        }
+        else {
+
+            textarea.focus();
+        }
+
+    },
+
+    noteContentFocusChange: function(event) {
+
+        var button = this.$el.find("#toggleKeyboard");
+        if ( event.type == "focusin" ) {
+            button.addClass( "closeKeyboard" );
+        }
+        else {
+            button.removeClass( "closeKeyboard" );
         }
     },
 

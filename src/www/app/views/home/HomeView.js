@@ -200,9 +200,15 @@ window.HomeView = Backbone.View.extend({
                 li.animate({
                     opacity:0,
                     height:0
-                }, 250, function() {
+                }, 200, function() {
                     li.remove();
-                    window.viewNavigator.refreshScroller();
+
+                    if (self.model.list.length <= 0) {
+                        self.render();
+                    }
+                    else {
+                        window.viewNavigator.refreshScroller();
+                    }
                 });
 
 

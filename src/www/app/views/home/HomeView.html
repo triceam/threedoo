@@ -8,13 +8,14 @@
 
     <br/>
 
-    <div>
     <% if (loading) { %>
         loading...
     <% } else { %>
         <% if ( list.length > 0 ) {
             var i=0;
         %>
+
+        <div>
             <ul class="dataList">
             <% _.each(list, function(item) { %>
 
@@ -30,11 +31,11 @@
                 </li>
 
             <% i++ }) %>
-            </div>
+            </ul>
+        </div>
         <% } else { %>
-            No lists yet!
+            <div class="script">No lists yet!</div>
         <% } %>
     <% } %>
-    </div>
 
 </div>

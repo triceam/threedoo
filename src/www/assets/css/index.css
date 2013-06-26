@@ -40,14 +40,19 @@ body {
     width:100%;
     margin:0px;
 
-    color:#FFF;
     border-radius: 6px;
     margin-right: 10px;
     padding: 10px;
     background: #075f73;
     border:1px solid #005669;
     box-shadow: 0px 2px 0px #65cce4;
+
+
     font-size: 16px;
+    font-family: "Helvetica Neue", "Arial";
+    color: rgb( 255, 255, 255 );
+    line-height: 1.375;
+
 }
 
 ::-webkit-input-placeholder {
@@ -67,6 +72,7 @@ body {
 .noteContent {
     padding: 10px 10px 0px 10px;
     margin-right: 10px;
+    position: relative;
 }
 
 .noteView textarea {
@@ -888,4 +894,40 @@ ul {
 .hiddenScrollbar {
     display:none;
     visibility: hidden;
+}
+
+
+
+.script {
+    font-size: 36px;
+    font-family: "jenna_sueregular";
+    color: rgb( 0, 0, 0 );
+    text-align: center;
+    text-shadow: 0px 2px 0px rgb( 126, 232, 255 );
+}
+
+#toggleKeyboard {
+    position: absolute;
+    bottom: 8px;
+    right:0px;
+    width:102px;
+    height:62px;
+    background: url('../images/buttons/show_keyboard_up.png');
+}
+
+#toggleKeyboard:active,
+#toggleKeyboard .active
+{
+    background: url('../images/buttons/show_keyboard_active.png');
+}
+
+
+#toggleKeyboard.closeKeyboard {
+    background: url('../images/buttons/hide_keyboard_up.png');
+}
+
+#toggleKeyboard.closeKeyboard:active,
+#toggleKeyboard.closeKeyboard .active
+{
+    background: url('../images/buttons/hide_keyboard_active.png');
 }
