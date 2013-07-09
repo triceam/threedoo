@@ -160,6 +160,11 @@ window.ListView = Backbone.View.extend({
 
             var ul = this.$el.find("ul");
 
+            if ( this.model && this.model.notes ) {
+
+                this.updateListHeights();
+            }
+
             ul.unbind("click", self.listItemClick);
             ul.bind("click", self.listItemClick);
 
@@ -531,6 +536,20 @@ window.ListView = Backbone.View.extend({
             $li.detach();
             this.$el.find( "#incompleteList").append( $li );
         }
+
+        var self = this;
+        setTimeout( function(){
+            self.updateListHeights();
+        }, 0 );
+    },
+
+    updateListHeights: function(event) {
+
+        var completeList = this.$el.find( "#completeList");
+        var incompleteList = this.$el.find( "#incompleteList");
+
+        completeList.css("height", (completeList.children().length * 100) + "px")
+        incompleteList.css("height", (incompleteList.children().length * 100) + "px")
     }
 
 });

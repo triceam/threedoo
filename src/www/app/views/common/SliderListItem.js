@@ -8,7 +8,7 @@ window.SliderListItem = function(options) {
 
     //Constants for horizontal swip gesture
     this.MAX_VERTICAL_THRESHOLD = 25;
-    this.MAX_HORIZONTAL_DISTANCE = -100;
+    this.MAX_HORIZONTAL_DISTANCE = -160;
 
     this.dispose = function() {
         var ul = self.target.find("ul");
@@ -35,6 +35,9 @@ window.SliderListItem = function(options) {
         var deleteButton = target.find(".listDelete");
 
         var id = target.attr( "id" );
+        target.stop()
+
+        target = target.find(".listContent");
         target.stop()
 
         if (event.originalEvent != undefined) {

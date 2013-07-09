@@ -81,6 +81,10 @@ window.HomeView = Backbone.View.extend({
 
         var ul = this.$el.find("ul");
 
+        if ( this.model && this.model.list ) {
+            ul.css( "height", (this.model.list.length * 100)+"px")
+        }
+
         ul.unbind("click", this.listItemTap);
         ul.bind("click", this.listItemTap);
 
@@ -197,6 +201,11 @@ window.HomeView = Backbone.View.extend({
                 self.purgeModel();
 
                 var li = self.$el.find("li[id='"+id+"']");
+
+                li.remove();
+                setTimeout( function() {window.viewNavigator.refreshScroller();}, 250 );
+                return;
+
                 li.animate({
                     opacity:0,
                     height:0
