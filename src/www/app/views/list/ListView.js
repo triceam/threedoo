@@ -125,7 +125,7 @@ window.ListView = Backbone.View.extend({
                 self.scroller = new iScroll( "scrollable", {scrollbarClass:"hiddenScrollbar"} );
             }, 10 );
 
-            this.headerActions = $("<div class='topHeaderActionContent' style='min-width:" + ($(window).width()-130) + "px; '><span id='nameSpan' style='max-width:" + ($(window).width()-150) + "px; overflow:hidden; white-space: nowrap; text-overflow: ellipsis; display:inline-block;'>" + this.model.NAME + "</span><img src='assets/images/disclosure.png' /></div>");
+            this.headerActions = $("<div class='topHeaderActionContent' style='min-width:" + ($(window).width()-260) + "px; '><span id='nameSpan' style='max-width:" + ($(window).width()-300   ) + "px; overflow:hidden; white-space: nowrap; text-overflow: ellipsis; display:inline-block;'>" + this.model.NAME + "</span><img src='assets/images/disclosure.png' /></div>");
 
         } else {
             this.headerActions.find("#nameSpan").html( this.model.NAME );

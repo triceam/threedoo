@@ -489,6 +489,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Andrew Trice (D67FV253XK)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "threedoo/threedoo-Prefix.pch";
@@ -497,6 +498,7 @@
 				INFOPLIST_FILE = "threedoo/threedoo-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = threedoo;
+				"PROVISIONING_PROFILE[sdk=*]" = "228644DD-6B13-416E-B5E6-EC19625E09B7";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

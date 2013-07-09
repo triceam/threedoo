@@ -68,7 +68,7 @@ window.HomeView = Backbone.View.extend({
         this.$el.html(template(this.model));
 
 
-        this.headerActions = $("<div style='text-align:center; color:white; min-width:" + ($(window).width()-130) + "px; margin-right:60px; margin-top:-6px;'><img src='assets/images/threedoo_header_logo.png' /></div></div>");
+        this.headerActions = $("<div style='text-align:center; color:white; min-width:" + ($(window).width()-260) + "px; margin-right:120px; margin-top:-3px;'><img src='assets/images/threedoo_header_logo.png' /></div></div>");
 
 
         if (this.sliderListItem != undefined) {

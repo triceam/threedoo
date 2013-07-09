@@ -29,7 +29,7 @@
 
                 <% _.each(location_data.categories, function(category) { %>
 
-                    <img src="<%= category.icon.prefix %>32<%= category.icon.suffix %>" style="vertical-align: middle" />
+                    <img src="<%= category.icon.prefix %>64<%= category.icon.suffix %>" style="vertical-align: middle; padding-top:4px;" />
 
                 <% }) %>
             </div>
@@ -39,8 +39,8 @@
         <div class="locationMap">
             <img
                 id="mapImage"
-                src="http://staticmap.openstreetmap.de/staticmap.php?center=<%= location_data.location.lat %>,<%= location_data.location.lng %>&zoom=14&size=<%= $(window).width() %>x120&maptype=mapnik&markers=<%= location_data.location.lat %>,<%= location_data.location.lng %>,ylw-pushpin"
-                style="position:absolute; width:<%= $(window).width() %>px; height:120px;"
+                src="http://staticmap.openstreetmap.de/staticmap.php?center=<%= location_data.location.lat %>,<%= location_data.location.lng %>&zoom=14&size=<%= $(window).width() %>x240&maptype=mapnik&markers=<%= location_data.location.lat %>,<%= location_data.location.lng %>,ylw-pushpin"
+                style="position:absolute; width:<%= $(window).width() %>px; height:240px;"
                 onload="$(this).css('opacity', 1);" />
         </div>
 
@@ -87,7 +87,7 @@
         <% } %>
 
         <% if ( location_data.canonicalUrl != undefined ) { %>
-            <button id="foursquare" class="defaultButton locActionButton"><img src="assets/images/foursquare_small.png" align="top">&nbsp;View on foursquare</button>
+            <button id="foursquare" class="defaultButton locActionButton"><img src="assets/images/foursquare_small.png" align="top" style="padding-left:8px">&nbsp;View on foursquare</button>
 
         <% } %>
 
