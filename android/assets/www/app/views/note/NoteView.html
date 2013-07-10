@@ -3,6 +3,7 @@
 
     <div class="noteContent">
         <textarea id="noteContent" placeholder="Add your words..."><%= DETAIL %></textarea>
+        <button id="toggleKeyboard"></button>
     </div>
 
     <% if ( images.length > 0 || soundclips.length > 0) { %>
@@ -45,7 +46,6 @@
 
             <button id="deleteButton"></button>
 
-            <!--<audio src="<%= item.REF %>" controls preload="none"></audio>-->
         </li>
 
         <% }) %>
@@ -57,12 +57,24 @@
     <% } %>
 
     <div class="noteContent">
-        <button id="addLocationButton"><%= location_data.name %></button>
+        <button id="addLocationButton">
+            <img src="assets/images/buttons/button_location.png" />
+            <img src="assets/images/icon_separator.png" />
+            <span class="buttonLabel"><%= location_data.name %></span>
+        </button>
 
-        <div style="position: relative; width:300px; height:44px;">
-        <button id="addPhotoButton">Add Photo</button>
+        <div style="position: relative; width:100%px; height:88px;">
+        <button id="addPhotoButton">
+            <img src="assets/images/buttons/button_camera.png" />
+            <img src="assets/images/icon_separator.png" />
+            <span class="buttonLabel">Add Photo</span>
+        </button>
 
-        <button id="addAudioButton">Add Sound</button>
+        <button id="addAudioButton">
+            <img src="assets/images/buttons/button_mic.png" />
+            <img src="assets/images/icon_separator.png" />
+            <span class="buttonLabel">Add Sound</span>
+        </button>
         </div>
     </div>
 

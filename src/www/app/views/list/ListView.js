@@ -171,6 +171,10 @@ window.ListView = Backbone.View.extend({
             var checkboxes = scrollContent.find("input");
             checkboxes.unbind("click", self.checkboxTap);
             checkboxes.bind("click", self.checkboxTap);
+
+            var checkboxes = scrollContent.find("label");
+            checkboxes.unbind("click", self.checkboxTap);
+            checkboxes.bind("click", self.checkboxTap);
         }
 
         this.rendered = true;
@@ -426,6 +430,9 @@ window.ListView = Backbone.View.extend({
         var id = target.attr( "id" );
 
         var self = this;
+        self.onNoteDeleted(event, id);
+
+        /*
 
         this.deleteModal = new DeleteItemModalView({
             model:this.model,
@@ -436,15 +443,16 @@ window.ListView = Backbone.View.extend({
         });
         this.deleteModal.bind("cancel", function(event){
             self.onNoteDeleteCancelled(event);
-        });
+        });  */
         return killEvent(event);
     },
 
     onNoteDeleted: function(event, id) {
 
-        this.deleteModal.unbind("deleted");
+        /*this.deleteModal.unbind("deleted");
         this.deleteModal.unbind("cancel");
         this.deleteModal = undefined;
+         */
 
         var note;
         for (var i=0; i<this.model.notes.length; i++) {
@@ -550,6 +558,9 @@ window.ListView = Backbone.View.extend({
 
         completeList.css("height", (completeList.children().length * 100) + "px")
         incompleteList.css("height", (incompleteList.children().length * 100) + "px")
+
+        var separator = this.$el.find( "#separator");
+        separator.css( "display", (completeList.children().length > 0 ? "block" : "none") );
     }
 
 });

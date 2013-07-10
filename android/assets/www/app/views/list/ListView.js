@@ -125,7 +125,7 @@ window.ListView = Backbone.View.extend({
                 self.scroller = new iScroll( "scrollable", {scrollbarClass:"hiddenScrollbar"} );
             }, 10 );
 
-            this.headerActions = $("<div class='topHeaderActionContent' style='min-width:" + ($(window).width()-130) + "px; '><span id='nameSpan' style='max-width:" + ($(window).width()-150) + "px; overflow:hidden; white-space: nowrap; text-overflow: ellipsis; display:inline-block;'>" + this.model.NAME + "</span><img src='assets/images/disclosure.png' /></div>");
+            this.headerActions = $("<div class='topHeaderActionContent' style='min-width:" + ($(window).width()-260) + "px; '><span id='nameSpan' style='max-width:" + ($(window).width()-300   ) + "px; overflow:hidden; white-space: nowrap; text-overflow: ellipsis; display:inline-block;'>" + this.model.NAME + "</span><img src='assets/images/disclosure.png' /></div>");
 
         } else {
             this.headerActions.find("#nameSpan").html( this.model.NAME );
@@ -160,10 +160,19 @@ window.ListView = Backbone.View.extend({
 
             var ul = this.$el.find("ul");
 
+            if ( this.model && this.model.notes ) {
+
+                this.updateListHeights();
+            }
+
             ul.unbind("click", self.listItemClick);
             ul.bind("click", self.listItemClick);
 
             var checkboxes = scrollContent.find("input");
+            checkboxes.unbind("click", self.checkboxTap);
+            checkboxes.bind("click", self.checkboxTap);
+
+            var checkboxes = scrollContent.find("label");
             checkboxes.unbind("click", self.checkboxTap);
             checkboxes.bind("click", self.checkboxTap);
         }
@@ -421,6 +430,9 @@ window.ListView = Backbone.View.extend({
         var id = target.attr( "id" );
 
         var self = this;
+        self.onNoteDeleted(event, id);
+
+        /*
 
         this.deleteModal = new DeleteItemModalView({
             model:this.model,
@@ -431,15 +443,16 @@ window.ListView = Backbone.View.extend({
         });
         this.deleteModal.bind("cancel", function(event){
             self.onNoteDeleteCancelled(event);
-        });
+        });  */
         return killEvent(event);
     },
 
     onNoteDeleted: function(event, id) {
 
-        this.deleteModal.unbind("deleted");
+        /*this.deleteModal.unbind("deleted");
         this.deleteModal.unbind("cancel");
         this.deleteModal = undefined;
+         */
 
         var note;
         for (var i=0; i<this.model.notes.length; i++) {
@@ -531,6 +544,23 @@ window.ListView = Backbone.View.extend({
             $li.detach();
             this.$el.find( "#incompleteList").append( $li );
         }
+
+        var self = this;
+        setTimeout( function(){
+            self.updateListHeights();
+        }, 0 );
+    },
+
+    updateListHeights: function(event) {
+
+        var completeList = this.$el.find( "#completeList");
+        var incompleteList = this.$el.find( "#incompleteList");
+
+        completeList.css("height", (completeList.children().length * 100) + "px")
+        incompleteList.css("height", (incompleteList.children().length * 100) + "px")
+
+        var separator = this.$el.find( "#separator");
+        separator.css( "display", (completeList.children().length > 0 ? "block" : "none") );
     }
 
 });

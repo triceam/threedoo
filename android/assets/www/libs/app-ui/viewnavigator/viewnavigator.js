@@ -254,7 +254,7 @@ ViewNavigator.prototype.updateView = function( viewDescriptor ) {
     			opacity:0,
     			avoidTransforms:false,
     			useTranslate3d: true
-        }, this.animationDuration );
+        }, this.animationDuration/3 );
         //}, this.animationDuration, func );
     		
     	this.headerContent.animate({
@@ -309,7 +309,7 @@ ViewNavigator.prototype.updateView = function( viewDescriptor ) {
     			opacity:0,
     			avoidTransforms:false,
     			useTranslate3d: true
-    		}, this.animationDuration );
+    		}, this.animationDuration/3 );
     		
     	//using a timeout to get around inconsistent response times for webkittransitionend event
     	//var func = this.animationCompleteHandler(this.contentPendingRemove, this.headerContentPendingRemove, this.headerContent, this.contentViewHolder );

@@ -66,6 +66,15 @@ function defer(func) {
 }
 
 function init() {
+
+
+    if (device.platform == "Android") {
+        window.swishSound = new Media("/android_asset/www/assets/sounds/swoosh.mp3");
+    } else {
+        window.swishSound = new Media("assets/sounds/swoosh.caf");
+    }
+
+
     var emulated = window.tinyHippos != undefined;
     if ( true ){
 

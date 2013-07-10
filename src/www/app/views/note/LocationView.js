@@ -63,6 +63,7 @@ window.LocationView = Backbone.View.extend({
             this.headerActions.css("display", "inline-block");
         }
         else {
+
             this.headerActions.css("display", "none");
         }
 

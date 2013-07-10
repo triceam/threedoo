@@ -8,15 +8,15 @@ window.SliderListItem = function(options) {
 
     //Constants for horizontal swip gesture
     this.MAX_VERTICAL_THRESHOLD = 25;
-    this.MAX_HORIZONTAL_DISTANCE = -100;
+    this.MAX_HORIZONTAL_DISTANCE = -$(window).width()/2;
 
     this.dispose = function() {
         var ul = self.target.find("ul");
 
         ul.unbind("touchstart", self.listItemTouchStart);
 
-        var delButtons = ul.find("button.listDelete");
-        delButtons.unbind("click", self.deleteButtonClick);
+        //var delButtons = ul.find("button.listDelete");
+        //delButtons.unbind("click", self.deleteButtonClick);
     }
 
     this.listItemTouchStart = function(event){
@@ -35,6 +35,9 @@ window.SliderListItem = function(options) {
         var deleteButton = target.find(".listDelete");
 
         var id = target.attr( "id" );
+        target.stop()
+
+        target = target.find(".listContent");
         target.stop()
 
         if (event.originalEvent != undefined) {
@@ -73,14 +76,18 @@ window.SliderListItem = function(options) {
                 var opacity = 0;
 
                 if ( left < breakpoint ){
-                    left = self.MAX_HORIZONTAL_DISTANCE;
-                    opacity = 1;
+                    left = 4*self.MAX_HORIZONTAL_DISTANCE;
+                    opacity = 0;
+
+                    window.swishSound.play();
+                    setTimeout(function(){
+                        self.handler(event);
+                    }, 250);
                 }
                 else {
                     left = 0;
                 }
 
-                // var complete = function() {
                 if ( opacity == 0){
                     deleteButton.css("display", "none");
                 }
@@ -202,7 +209,7 @@ window.SliderListItem = function(options) {
     ul.unbind("touchstart", self.listItemTouchStart);
     ul.bind("touchstart", self.listItemTouchStart);
 
-    var delButtons = ul.find("button.listDelete");
-    delButtons.unbind("click", self.handler);
-    delButtons.bind("click", self.handler);
+    //var delButtons = ul.find("button.listDelete");
+    //delButtons.unbind("click", self.handler);
+    //delButtons.bind("click", self.handler);
 }

@@ -1,7 +1,7 @@
 <% if ( notes.length > 0 ) {
     var completed = 0;
 %>
-    <ul id="incompleteList" class="dataList">
+    <ul id="incompleteList" class="dataList animatedList">
         <% _.each(notes, function(item) {
 
         console.log( "complete" );
@@ -10,7 +10,7 @@
         %>
 
             <li id="<%= item.ID %>">
-                <div class="listContent">
+                <div class="listContent" id="<%= item.ID %>">
 
                     <input class="checkbox" type="checkbox" <% if (item.COMPLETE == true || item.COMPLETE == "TRUE") { %>checked<% } %> />
                     <span class="left checkBoxListLabel">
@@ -92,16 +92,16 @@
         <% }}) %>
     </ul>
 
-    <h4>DONE</h4>
+    <h4 id="separator" class="listSeparator">DONE</h4>
 
-    <ul id="completeList" class="dataList">
+    <ul id="completeList" class="dataList animatedList">
         <% _.each(notes, function(item) {
 
         if ( (item.COMPLETE == true || item.COMPLETE == "TRUE") ) {
         %>
 
         <li id="<%= item.ID %>">
-            <div class="listContent">
+            <div class="listContent" id="<%= item.ID %>">
 
                 <input class="checkbox" type="checkbox" <% if (item.COMPLETE == true || item.COMPLETE == "TRUE") { %>checked<% } %> />
                     <span class="left checkBoxListLabel">

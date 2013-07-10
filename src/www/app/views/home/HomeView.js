@@ -40,7 +40,9 @@ window.HomeView = Backbone.View.extend({
     },
 
     events:{
-        "keypress input":"addNewList"
+        "keypress input":"addNewList",
+        "focusin input": "onInputFocus",
+        "focusout input": "onInputBlur"
     },
 
     /*,
@@ -48,6 +50,15 @@ window.HomeView = Backbone.View.extend({
      "touchstart li":"onLiTouchStart",
      "tap button.listDelete":"onLiButtonTap"*/
 
+    onInputFocus:function(event) {
+        $("body").append( this.cancelButton );
+    },
+
+
+    onInputBlur:function(event) {
+        this.cancelButton.detach();
+
+    },
 
     purgeModel:function() {
         if ( this.model.list != undefined ) {
@@ -69,6 +80,12 @@ window.HomeView = Backbone.View.extend({
 
 
         this.headerActions = $("<div style='text-align:center; color:white; min-width:" + ($(window).width()-260) + "px; margin-right:120px; margin-top:-3px;'><img src='assets/images/threedoo_header_logo.png' /></div></div>");
+
+        if (this.cancelButton == undefined) {
+            this.cancelButton = $("<a href='#' class='viewNavigator_header_backlink viewNavigator_backButtonPosition viewNavigator_header_cancel'></a>");
+            var self = this;
+            this.cancelButton.click(function(event){ self.$el.find("input").val("") });
+        }
 
 
         if (this.sliderListItem != undefined) {
@@ -131,6 +148,9 @@ window.HomeView = Backbone.View.extend({
                 window.viewNavigator.pushView( new ListView({model:list}) );
             } );
 
+            event.stopPropagation();
+            event.preventDefault();
+            return false;
         }
     },
 
@@ -165,6 +185,8 @@ window.HomeView = Backbone.View.extend({
 
         var id = target.attr( "id" );
 
+        self.onListDeleted(event ,id);
+        /*
         this.deleteModal = new DeleteItemModalView({
             model:{},
             type:"list"
@@ -174,7 +196,7 @@ window.HomeView = Backbone.View.extend({
         });
         this.deleteModal.bind("cancel", function(event){
             self.onListDeleteCancelled(event);
-        });
+        });           */
         return killEvent(event);
     },
 
@@ -182,9 +204,11 @@ window.HomeView = Backbone.View.extend({
 
     onListDeleted: function(event, id) {
 
+        /*
         this.deleteModal.unbind("deleted");
         this.deleteModal.unbind("cancel");
         this.deleteModal = undefined;
+        */
 
         var list;
         for (var i=0; i<this.model.list.length; i++) {
@@ -231,7 +255,7 @@ window.HomeView = Backbone.View.extend({
         this.deleteModal.unbind("cancel");
         this.deleteModal = undefined;
         //alert("cancelled");
-    },
+    }
 });
 
 window.HomeView.getStyleFor = function(index) {

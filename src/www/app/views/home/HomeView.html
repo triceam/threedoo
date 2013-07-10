@@ -16,12 +16,12 @@
         %>
 
         <div>
-            <ul class="dataList">
+            <ul class="dataList animatedList">
             <% _.each(list, function(item) { %>
 
                 <li id="<%= item.ID %>" class="<%= window.HomeView.getStyleFor(i) %>">
 
-                    <div class="listContent">
+                    <div class="listContent" id="<%= item.ID %>">
 
                         <span class="left"><%= item.NAME %></span>
                         <span class="right"><%= item.notes == undefined ? item.NOTES : item.notes.length %></span>

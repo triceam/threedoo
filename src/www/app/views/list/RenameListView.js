@@ -49,6 +49,10 @@ window.RenameListView = Backbone.View.extend({
             $(event.target).blur();
             this.renameNewList(event);
 
+            event.stopPropagation();
+            event.preventDefault();
+            return false;
+
         }  else {
             this.changed = true;
         }

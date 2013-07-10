@@ -46,8 +46,8 @@ window.ImageModalHelper = function( note, callback ){
 
 
     var modalContent = $('<div class="footerOptions">' +
-        '<button id="cameraCaptureButton" class="defaultButton">CAMERA</button> <br/> ' +
-        '<button id="photoGalleryButton" class="defaultButton">PHOTO GALLERY</button> <br/>' +
+        '<button id="cameraCaptureButton" class="defaultButton"><img src="assets/images/buttons/button_camera_icon.png" />CAMERA</button> <br/> ' +
+        '<button id="photoGalleryButton" class="defaultButton"><img src="assets/images/buttons/button_gallery_icon.png" />PHOTO GALLERY</button> <br/>' +
         '<button id="cancelButton" class="warningButton">CANCEL</button> ' +
         '</div>');
 

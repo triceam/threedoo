@@ -9,9 +9,9 @@
 
         <li id="<%= item.id %>">
 
-            <div class="liContent">
+            <div class="listContent liContent">
                 <div id="name"><%= item.name %></div>
-                <%= item.location.address %>
+                <div id="location"><%= item.location.address %></div>
             </div>
         </li>
 
@@ -94,7 +94,7 @@
 
 
     <% } else if ( location_state == "SEARCHING" ) { %>
-        Finding Location...
+        <div class="script">Finding Location...</div>
 
     <% } else  { %>
         Unable to determine your current location.  Please ensure that location services are enabled.
