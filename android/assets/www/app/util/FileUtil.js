@@ -30,7 +30,7 @@ window.FileUtil = {
             tmpURI = tmpURI.substr( prefix.length );
         }
 
-        if (tmpURI.indexOf("/" == 0)) {
+        if (tmpURI.indexOf("/" == 0) && device.platform != "Android") {
 
             tmpURI = "file://" + tmpURI;
         }

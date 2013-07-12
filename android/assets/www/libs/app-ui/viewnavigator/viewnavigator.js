@@ -427,24 +427,3 @@ ViewNavigator.prototype.guid = function() {
 	return (this.S4() + this.S4() + "-" + this.S4() + "-4" + this.S4().substr(0,3) + "-" + this.S4() + "-" + this.S4() + this.S4() + this.S4()).toLowerCase();
 }
 
-
-
-/*  PHONEGAP INTEGRATION */
-/*
-//android+phonegap specific back button support - will only work if phonegap is used on android (www.phonegap.com)
-if ( typeof PhoneGap != 'undefined' ) { 
-	document.addEventListener("deviceready", onDeviceReady, false);
-}
-
-function onDeviceReady() {
-   document.addEventListener("backbutton", onBackKey, false);
-}
-
-function onBackKey( event ) {
-	event.preventDefault();
-	window.viewNavigator.popView();
-	for ( var x=0; x<window.backKeyViewNavigators.length; x++ ) {
-		window.backKeyViewNavigators[x].popView();
-	}
-}
-*/

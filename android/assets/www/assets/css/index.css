@@ -813,6 +813,8 @@ ul {
     white-space: nowrap;
     text-overflow: ellipsis;
     display:block;
+    background-color:#57c2db;
+    background-image: url('../images/background.jpg');
 }
 
 .geoList li {

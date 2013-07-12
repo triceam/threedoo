@@ -1,0 +1,105 @@
+
+<div class="content">
+
+    <% if ( location_state == "RESULTS" ) { %>
+
+
+    <ul class="dataList geoList">
+        <% _.each(foursuare_locations, function(item) { %>
+
+        <li id="<%= item.id %>">
+
+            <div class="listContent liContent">
+                <div id="name"><%= item.name %></div>
+                <div id="location"><%= item.location.address %></div>
+            </div>
+        </li>
+
+        <% }) %>
+    </ul>
+
+
+    <% } else if ( location_state == "COMPLETE" ) { %>
+
+        <div class="locationName">
+            <%= location_data.name %>
+
+
+            <div class="locationClassification">
+
+                <% _.each(location_data.categories, function(category) { %>
+
+                    <img src="<%= category.icon.prefix %>64<%= category.icon.suffix %>" style="vertical-align: middle; padding-top:4px;" />
+
+                <% }) %>
+            </div>
+
+        </div>
+
+        <div class="locationMap">
+            <img
+                id="mapImage"
+                src="http://staticmap.openstreetmap.de/staticmap.php?center=<%= location_data.location.lat %>,<%= location_data.location.lng %>&zoom=14&size=<%= $(window).width() %>x240&maptype=mapnik&markers=<%= location_data.location.lat %>,<%= location_data.location.lng %>,ylw-pushpin"
+                style="position:absolute; width:<%= $(window).width() %>px; height:240px;"
+                onload="$(this).css('opacity', 1);" />
+        </div>
+
+        <% if ( (location_data.location.address != undefined && location_data.location.address != "" ) ||
+                (location_data.location.city != undefined && location_data.location.city != "" ) ||
+                (location_data.location.state != undefined && location_data.location.state != "" ) ||
+                (location_data.location.postalCode != undefined && location_data.location.postalCode != "" )
+                ) { %>
+            <div class="locationAddress">
+
+                <% if (location_data.location.address != undefined && location_data.location.address != "" ) { %>
+                    <%= location_data.location.address %><br/>
+                <% } %>
+
+                <% if (location_data.location.city != undefined && location_data.location.city != "" ) { %>
+                    <%= location_data.location.city %><% if ((location_data.location.state != undefined && location_data.location.state != "" ) || (location_data.location.postalCode != undefined && location_data.location.postalCode != "" )) { %>,<% } %>
+                <% } %>
+
+                <% if (location_data.location.state != undefined && location_data.location.state != "" ) { %>
+                    <%= location_data.location.state %><% if (location_data.location.postalCode != undefined && location_data.location.postalCode != "" ) { %>,<% } %>
+                <% } %>
+
+                <% if (location_data.location.postalCode != undefined && location_data.location.postalCode != "" ) { %>
+                    <%= location_data.location.postalCode %>
+                <% } %>
+
+                <button id="mapIt" class="defaultButton rightButton">Directions</button>
+
+
+            </div>
+        <% } %>
+
+
+        <% if ( location_data.contact.formattedPhone != undefined ) { %>
+            <div class="locationPhone topBorder">
+                <%= location_data.contact.formattedPhone %>
+                <button id="callNow" class="defaultButton rightButton">Call Now</button>
+            </div>
+        <% } %>
+
+        <% if ( location_data.contact.twitter != undefined ) { %>
+
+            <button id="twitter" class="defaultButton locActionButton"><img src="assets/images/twitter.png" align="top">&nbsp;<%= location_data.contact.twitter %></button>
+        <% } %>
+
+        <% if ( location_data.canonicalUrl != undefined ) { %>
+            <button id="foursquare" class="defaultButton locActionButton"><img src="assets/images/foursquare_small.png" align="top" style="padding-left:8px">&nbsp;View on foursquare</button>
+
+        <% } %>
+
+
+
+    <% } else if ( location_state == "SEARCHING" ) { %>
+        <div class="script">Finding Location...</div>
+
+    <% } else  { %>
+        Unable to determine your current location.  Please ensure that location services are enabled.
+
+        <%= location_error %>
+    <% }  %>
+
+</div>

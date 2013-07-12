@@ -44,12 +44,21 @@ var app = {
         //initialize database
         new DatabaseManager();
 
-        //document.addEventListener("backbutton", onBackKey, false);
+        document.addEventListener("backbutton", onBackKey, false);
 
 
 
     }
 };
+
+
+function onBackKey( event ) {
+	if ( window.viewNavigator.history.length > 1 ) {
+		event.preventDefault();
+		window.viewNavigator.popView();
+		return false;
+	}
+}
 
 function killEvent(event) {
 

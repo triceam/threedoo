@@ -39,7 +39,7 @@ window.AudioModalHelper = function( note, callback ){
 
     this.audioCaptureError = function(message) {
         //alert(message);
-        this.onModalClick(event);
+        self.onModalClick(event);
     }
 
 

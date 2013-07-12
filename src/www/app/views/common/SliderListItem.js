@@ -70,7 +70,7 @@ window.SliderListItem = function(options) {
                 left = 0;
             }
 
-            if ( left != self.MAX_HORIZONTAL_DISTANCE && left != 0 ){
+            if ( left != 0 ){
 
                 var breakpoint = self.MAX_HORIZONTAL_DISTANCE / 2;
                 var opacity = 0;
